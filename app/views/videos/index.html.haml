@@ -1,0 +1,9 @@
+%article.video_category
+  %header
+    %h3= link_to "TV Comedies"
+  .videos.row.d-flex.justify-content-around
+    - @videos.each do |video|
+      .video.col-sm-2
+        = link_to video_path(video) do
+          - image_tag video.small_cover_url
+

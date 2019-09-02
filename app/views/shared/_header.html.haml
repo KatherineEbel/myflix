@@ -1,22 +1,28 @@
-%section#top-header.row
-  %h1.col-md-2
-    = link_to "MyFLiX"
-  %ul.col-md-4.clearfix
-    %li= link_to "Videos"
-    %li= link_to "My Queue"
-    %li= link_to "People"
-  %form.col-md-5.form-inline(action="")
-    .form-group
-      %input.form-control(type="text" placeholder="Search for videos here")
-    %button.btn.btn-secondary(type="submit") Search
-  #user_links.float-right
-    %ul
-      %li.dropdown
-        %a(href="#" id="dlabel" role="button" data-toggle="dropdown" class="dropdown-toggle" data-target="#")
-          Welcome, Philip J. Fry
-          %b.caret
-        %ul.dropdown-menu(role="menu" aria-labelledby="dlabel")
-          %li
-            %a(href="#") Account
-            %a(href="#") Plan and Billing
-            %a(href="#") Sign Out
+%nav.navbar.navbar-expand-md#top-header
+  %h1.navbar-brand= link_to "MyFLiX", root_path
+  %button.navbar-toggler{type: 'button',
+   data_toggle: 'collapse',
+   data_target: '#nav_menu',
+   aria_controls: 'nav_menu',
+   aria_expanded: 'false',
+   aria_label: 'Toggle navigation'}
+    %span.navbar-toggler-icon
+  .collapse.navbar-collapse.d-flex.justify-content-around#nav_menu
+    .navbar-nav
+      %li= link_to "Videos", '/home'
+      %li= link_to "My Queue"
+      %li= link_to "People"
+    %form.form-inline
+      %input.form-control.mr-sm-2{type: 'search',
+      placeholder: 'Search for videos here',
+      aria_label: 'Search for videos here'}
+      %button.btn.btn-secondary.my-2.my-sm-0{type: 'submit'}= 'Search'
+      .nav-item.dropdown
+        %a.nav-link.dropdown-toggle#user_links(role='button'
+        data-toggle='dropdown'
+        aria-haspopup= 'true'
+        aria-expanded= 'false')= 'Welcome, Philip J. Fry'
+        .dropdown-menu{aria_labelledby: 'user_links'}
+          %a.dropdown-item(href="#") Account
+          %a.dropdown-item(href="#") Plan and Billing
+          %a.dropdown-item(href="#") Sign Out

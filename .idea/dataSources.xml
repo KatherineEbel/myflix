@@ -7,5 +7,11 @@
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
       <jdbc-url>jdbc:postgresql://localhost:5432/myflix_development</jdbc-url>
     </data-source>
+    <data-source source="LOCAL" name="test_db@localhost" uuid="ca63d7b3-26f5-4eaf-8aee-c100ffba10be">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://localhost:5432/myflix_test</jdbc-url>
+    </data-source>
   </component>
 </project>

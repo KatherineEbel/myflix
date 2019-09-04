@@ -6,25 +6,16 @@ nav#top-header
     font-size: 20px
     padding-bottom: 0
 
-  .navbar-nav
-    a
-      margin-right: 0.8rem
-      text-transform: uppercase
+  #nav_menu
+    .navbar-nav
+      a
+        margin-right: 0.8rem
+        text-transform: uppercase
 
-  #user_links
-    padding-top: 8px
-    > ul
-      > li
-        float: left
-        width: 200px
+    .dropdown.show
+      .dropdown-menu
         a
-          margin: 0 10px
-          b
-            border-top-color: white
-        > ul
-          > li
-            &.open &:hover
-              background: red
-            a
-              color: black
-              margin: 0
+          color: black
+          &:hover
+            background: red
+

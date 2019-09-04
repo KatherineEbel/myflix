@@ -1,29 +1,30 @@
 %nav.navbar.navbar-expand-md#top-header
   %h1.navbar-brand= link_to "MyFLiX", root_path
-  %button.navbar-toggler{type: 'button',
-   data_toggle: 'collapse',
-   data_target: '#nav_menu',
-   aria_controls: 'nav_menu',
-   aria_expanded: 'false',
-   aria_label: 'Toggle navigation'}
-    %span.navbar-toggler-icon
-  .collapse.navbar-collapse.d-flex.justify-content-around#nav_menu
-    .navbar-nav.d-flex.align-items-center
-      = link_to "Videos", '/home'
-      = link_to "My Queue"
-      = link_to "People"
+  - if logged_in?
+    %button.navbar-toggler{type: 'button',
+                            data_toggle: 'collapse',
+                            data_target: '#nav_menu',
+                            aria_controls: 'nav_menu',
+                            aria_expanded: 'false',
+                            aria_label: 'Toggle navigation'}
+      %span.navbar-toggler-icon
+    .collapse.navbar-collapse.d-flex.justify-content-around#nav_menu
+      .navbar-nav.d-flex.align-items-center
+        = link_to "Videos", '/home'
+        = link_to "My Queue"
+        = link_to "People"
       .form-inline.mr-2.ml-lg-5
         = form_tag(search_videos_path, method: :get) do
           = search_field_tag(:query, nil, placeholder: 'Search for videos here...',
-            class: 'form-control',
-            aria: { label: 'Search for videos here...' })
+          class: 'form-control',
+          aria: { label: 'Search for videos here...' })
           = submit_tag 'Search', class: 'btn btn-secondary'
-      .nav-item.dropdown
-        %a.nav-link.dropdown-toggle#user_links(role='button'
+      .dropdown
+        %a.dropdown-toggle#user_links(role='button'
         data-toggle='dropdown'
         aria-haspopup= 'true'
-        aria-expanded= 'false')= 'Welcome, Philip J. Fry'
-        .dropdown-menu{aria_labelledby: 'user_links'}
+        aria-expanded= 'false')= "Welcome, #{current_user&.full_name}"
+        .dropdown-menu(aria-labelledby= 'user_links')
           %a.dropdown-item(href="#") Account
           %a.dropdown-item(href="#") Plan and Billing
-          %a.dropdown-item(href="#") Sign Out
+          %a.dropdown-item(href= sign_out_path) Sign Out

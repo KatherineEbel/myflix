@@ -1,10 +1,15 @@
                                Prefix Verb   URI Pattern                                                                              Controller#Action
-                                 root GET    /                                                                                        videos#index
+                                 root GET    /                                                                                        pages#front
                                  home GET    /home(.:format)                                                                          videos#index
+                             register GET    /register(.:format)                                                                      users#new
+                              sign_in GET    /sign_in(.:format)                                                                       sessions#new
+                             sign_out GET    /sign_out(.:format)                                                                      sessions#destroy
+                                      GET    /ui(/:action)(.:format)                                                                  ui#:action
+                             category GET    /categories/:id(.:format)                                                                categories#show
+                             sessions POST   /sessions(.:format)                                                                      sessions#create
+                                users POST   /users(.:format)                                                                         users#create
                         search_videos GET    /videos/search(.:format)                                                                 videos#search
                                 video GET    /videos/:id(.:format)                                                                    videos#show
-                             category GET    /categories/:id(.:format)                                                                categories#show
-                                      GET    /ui(/:action)(.:format)                                                                  ui#:action
         rails_mandrill_inbound_emails POST   /rails/action_mailbox/mandrill/inbound_emails(.:format)                                  action_mailbox/ingresses/mandrill/inbound_emails#create
         rails_postmark_inbound_emails POST   /rails/action_mailbox/postmark/inbound_emails(.:format)                                  action_mailbox/ingresses/postmark/inbound_emails#create
            rails_relay_inbound_emails POST   /rails/action_mailbox/relay/inbound_emails(.:format)                                     action_mailbox/ingresses/relay/inbound_emails#create

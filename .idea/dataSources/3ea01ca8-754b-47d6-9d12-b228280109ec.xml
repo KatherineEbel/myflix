@@ -15,10 +15,11 @@
     <database id="4" parent="1" name="myflix_development">
       <ObjectId>24895</ObjectId>
       <Owner>kathy</Owner>
-      <IntrospectionStateNumber>811</IntrospectionStateNumber>
+      <IntrospectionStateNumber>1814</IntrospectionStateNumber>
       <Current>1</Current>
       <Relations>sequence|table|24897|24899|1
 sequence|table|24908|24910|1
+sequence|table|24973|24975|1
 </Relations>
     </database>
     <database id="5" parent="1" name="myflix_test">
@@ -117,6 +118,7 @@ sequence|table|24908|24910|1
       <Comment>standard public schema</Comment>
       <StateNumber>359</StateNumber>
       <Owner>kathy</Owner>
+      <IntrospectionStateNumber>1815</IntrospectionStateNumber>
       <Current>1</Current>
     </schema>
     <access-method id="24" parent="4" name="btree">
@@ -175,5 +177,278 @@ sequence|table|24908|24910|1
       <SchemaName>pg_catalog</SchemaName>
       <SchemaId>11</SchemaId>
     </extension>
+    <sequence id="31" parent="23" name="categories_id_seq">
+      <ObjectId>24897</ObjectId>
+      <StateNumber>791</StateNumber>
+      <Owner>kathy</Owner>
+      <SequenceIdentity>1</SequenceIdentity>
+      <CacheSize>1</CacheSize>
+      <DataType>bigint</DataType>
+    </sequence>
+    <sequence id="32" parent="23" name="users_id_seq">
+      <ObjectId>24973</ObjectId>
+      <StateNumber>1811</StateNumber>
+      <Owner>kathy</Owner>
+      <SequenceIdentity>1</SequenceIdentity>
+      <CacheSize>1</CacheSize>
+      <DataType>bigint</DataType>
+    </sequence>
+    <sequence id="33" parent="23" name="videos_id_seq">
+      <ObjectId>24908</ObjectId>
+      <StateNumber>792</StateNumber>
+      <Owner>kathy</Owner>
+      <SequenceIdentity>1</SequenceIdentity>
+      <CacheSize>1</CacheSize>
+      <DataType>bigint</DataType>
+    </sequence>
+    <table id="34" parent="23" name="ar_internal_metadata">
+      <ObjectId>24927</ObjectId>
+      <Owner>kathy</Owner>
+      <StateNumber>796</StateNumber>
+    </table>
+    <table id="35" parent="23" name="categories">
+      <ObjectId>24899</ObjectId>
+      <Owner>kathy</Owner>
+      <StateNumber>791</StateNumber>
+    </table>
+    <table id="36" parent="23" name="schema_migrations">
+      <ObjectId>24919</ObjectId>
+      <Owner>kathy</Owner>
+      <StateNumber>793</StateNumber>
+    </table>
+    <table id="37" parent="23" name="users">
+      <ObjectId>24975</ObjectId>
+      <Owner>kathy</Owner>
+      <StateNumber>1811</StateNumber>
+    </table>
+    <table id="38" parent="23" name="videos">
+      <ObjectId>24910</ObjectId>
+      <Owner>kathy</Owner>
+      <StateNumber>792</StateNumber>
+    </table>
+    <column id="39" parent="34" name="key">
+      <Position>1</Position>
+      <DataType>varchar|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>796</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="40" parent="34" name="value">
+      <Position>2</Position>
+      <DataType>varchar|0s</DataType>
+      <StateNumber>796</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="41" parent="34" name="created_at">
+      <Position>3</Position>
+      <DataType>timestamp(6)|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>796</StateNumber>
+      <TypeId>1114</TypeId>
+    </column>
+    <column id="42" parent="34" name="updated_at">
+      <Position>4</Position>
+      <DataType>timestamp(6)|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>796</StateNumber>
+      <TypeId>1114</TypeId>
+    </column>
+    <index id="43" parent="34" name="ar_internal_metadata_pkey">
+      <ObjectId>24933</ObjectId>
+      <StateNumber>796</StateNumber>
+      <ColNames>key</ColNames>
+      <Unique>1</Unique>
+      <Primary>1</Primary>
+    </index>
+    <key id="44" parent="34" name="ar_internal_metadata_pkey">
+      <ObjectId>24934</ObjectId>
+      <StateNumber>796</StateNumber>
+      <ColNames>key</ColNames>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>ar_internal_metadata_pkey</UnderlyingIndexName>
+    </key>
+    <column id="45" parent="35" name="id">
+      <Position>1</Position>
+      <DataType>bigint|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>791</StateNumber>
+      <DefaultExpression>nextval(&apos;categories_id_seq&apos;::regclass)</DefaultExpression>
+      <TypeId>20</TypeId>
+    </column>
+    <column id="46" parent="35" name="name">
+      <Position>2</Position>
+      <DataType>varchar|0s</DataType>
+      <StateNumber>791</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="47" parent="35" name="created_at">
+      <Position>3</Position>
+      <DataType>timestamp(6)|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>791</StateNumber>
+      <TypeId>1114</TypeId>
+    </column>
+    <column id="48" parent="35" name="updated_at">
+      <Position>4</Position>
+      <DataType>timestamp(6)|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>791</StateNumber>
+      <TypeId>1114</TypeId>
+    </column>
+    <index id="49" parent="35" name="categories_pkey">
+      <ObjectId>24906</ObjectId>
+      <StateNumber>791</StateNumber>
+      <ColNames>id</ColNames>
+      <Unique>1</Unique>
+      <Primary>1</Primary>
+    </index>
+    <key id="50" parent="35" name="categories_pkey">
+      <ObjectId>24907</ObjectId>
+      <StateNumber>791</StateNumber>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>categories_pkey</UnderlyingIndexName>
+    </key>
+    <column id="51" parent="36" name="version">
+      <Position>1</Position>
+      <DataType>varchar|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>793</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <index id="52" parent="36" name="schema_migrations_pkey">
+      <ObjectId>24925</ObjectId>
+      <StateNumber>793</StateNumber>
+      <ColNames>version</ColNames>
+      <Unique>1</Unique>
+      <Primary>1</Primary>
+    </index>
+    <key id="53" parent="36" name="schema_migrations_pkey">
+      <ObjectId>24926</ObjectId>
+      <StateNumber>793</StateNumber>
+      <ColNames>version</ColNames>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>schema_migrations_pkey</UnderlyingIndexName>
+    </key>
+    <column id="54" parent="37" name="id">
+      <Position>1</Position>
+      <DataType>bigint|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>1811</StateNumber>
+      <DefaultExpression>nextval(&apos;users_id_seq&apos;::regclass)</DefaultExpression>
+      <TypeId>20</TypeId>
+    </column>
+    <column id="55" parent="37" name="email">
+      <Position>2</Position>
+      <DataType>varchar|0s</DataType>
+      <StateNumber>1811</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="56" parent="37" name="full_name">
+      <Position>3</Position>
+      <DataType>varchar|0s</DataType>
+      <StateNumber>1811</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="57" parent="37" name="password_digest">
+      <Position>4</Position>
+      <DataType>varchar|0s</DataType>
+      <StateNumber>1811</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="58" parent="37" name="created_at">
+      <Position>5</Position>
+      <DataType>timestamp(6)|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>1811</StateNumber>
+      <TypeId>1114</TypeId>
+    </column>
+    <column id="59" parent="37" name="updated_at">
+      <Position>6</Position>
+      <DataType>timestamp(6)|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>1811</StateNumber>
+      <TypeId>1114</TypeId>
+    </column>
+    <index id="60" parent="37" name="users_pkey">
+      <ObjectId>24982</ObjectId>
+      <StateNumber>1811</StateNumber>
+      <ColNames>id</ColNames>
+      <Unique>1</Unique>
+      <Primary>1</Primary>
+    </index>
+    <key id="61" parent="37" name="users_pkey">
+      <ObjectId>24983</ObjectId>
+      <StateNumber>1811</StateNumber>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>users_pkey</UnderlyingIndexName>
+    </key>
+    <column id="62" parent="38" name="id">
+      <Position>1</Position>
+      <DataType>bigint|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>792</StateNumber>
+      <DefaultExpression>nextval(&apos;videos_id_seq&apos;::regclass)</DefaultExpression>
+      <TypeId>20</TypeId>
+    </column>
+    <column id="63" parent="38" name="title">
+      <Position>2</Position>
+      <DataType>varchar|0s</DataType>
+      <StateNumber>792</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="64" parent="38" name="description">
+      <Position>3</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>792</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="65" parent="38" name="small_cover_url">
+      <Position>4</Position>
+      <DataType>varchar|0s</DataType>
+      <StateNumber>792</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="66" parent="38" name="large_cover_url">
+      <Position>5</Position>
+      <DataType>varchar|0s</DataType>
+      <StateNumber>792</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="67" parent="38" name="created_at">
+      <Position>6</Position>
+      <DataType>timestamp(6)|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>792</StateNumber>
+      <TypeId>1114</TypeId>
+    </column>
+    <column id="68" parent="38" name="updated_at">
+      <Position>7</Position>
+      <DataType>timestamp(6)|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>792</StateNumber>
+      <TypeId>1114</TypeId>
+    </column>
+    <column id="69" parent="38" name="category_id">
+      <Position>8</Position>
+      <DataType>integer|0s</DataType>
+      <StateNumber>792</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <index id="70" parent="38" name="videos_pkey">
+      <ObjectId>24917</ObjectId>
+      <StateNumber>792</StateNumber>
+      <ColNames>id</ColNames>
+      <Unique>1</Unique>
+      <Primary>1</Primary>
+    </index>
+    <key id="71" parent="38" name="videos_pkey">
+      <ObjectId>24918</ObjectId>
+      <StateNumber>792</StateNumber>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>videos_pkey</UnderlyingIndexName>
+    </key>
   </database-model>
 </dataSource>

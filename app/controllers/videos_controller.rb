@@ -1,4 +1,8 @@
+# frozen_string_literal: true
+
+# videos_controller
 class VideosController < ApplicationController
+  before_action :require_user
   def index
     @categories = Category.all
   end

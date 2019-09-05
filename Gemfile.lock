@@ -1,3 +1,11 @@
+GIT
+  remote: https://github.com/faker-ruby/faker.git
+  revision: 4247080eb5ea1856a12860eedb08cf36ef8e2219
+  branch: master
+  specs:
+    faker (2.2.1)
+      i18n (~> 1.6.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -81,6 +89,7 @@ GEM
     crass (1.0.4)
     diff-lcs (1.3)
     erubi (1.8.0)
+    fabrication (2.20.2)
     ffi (1.11.1)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
@@ -134,6 +143,10 @@ GEM
       bundler (>= 1.3.0)
       railties (= 6.0.0)
       sprockets-rails (>= 2.0.0)
+    rails-controller-testing (1.0.4)
+      actionpack (>= 5.0.1.x)
+      actionview (>= 5.0.1.x)
+      activesupport (>= 5.0.1.x)
     rails-dom-testing (2.0.3)
       activesupport (>= 4.2.0)
       nokogiri (>= 1.6)
@@ -158,14 +171,14 @@ GEM
     rspec-mocks (3.8.1)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.8.0)
-    rspec-rails (3.8.2)
-      actionpack (>= 3.0)
-      activesupport (>= 3.0)
-      railties (>= 3.0)
-      rspec-core (~> 3.8.0)
-      rspec-expectations (~> 3.8.0)
-      rspec-mocks (~> 3.8.0)
-      rspec-support (~> 3.8.0)
+    rspec-rails (4.0.0.beta2)
+      actionpack (>= 4.2)
+      activesupport (>= 4.2)
+      railties (>= 4.2)
+      rspec-core (~> 3.8)
+      rspec-expectations (~> 3.8)
+      rspec-mocks (~> 3.8)
+      rspec-support (~> 3.8)
     rspec-support (3.8.2)
     ruby_dep (1.5.0)
     rubyzip (1.2.3)
@@ -234,13 +247,16 @@ DEPENDENCIES
   bootstrap_form
   byebug
   capybara (>= 2.15)
+  fabrication
+  faker!
   haml
   jbuilder (~> 2.7)
   listen (>= 3.0.5, < 3.2)
   pg (>= 0.18, < 2.0)
   puma (~> 3.11)
   rails (~> 6.0.0)
-  rspec-rails
+  rails-controller-testing
+  rspec-rails (~> 4.0.0.beta2)
   sass-rails (~> 5)
   selenium-webdriver
   shoulda-matchers

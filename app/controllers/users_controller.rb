@@ -10,8 +10,10 @@ class UsersController < ApplicationController
     @user = User.new params.require(:user).permit(:email, :password, :full_name)
     if @user.save
       redirect_to sign_in_path
+      flash[:success] = 'Registration completed, you can log in now.'
     else
       render :new
+      flash[:danger] = 'Correct errors and try again.'
     end
   end
 end

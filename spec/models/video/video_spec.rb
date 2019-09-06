@@ -5,6 +5,14 @@ require 'rails_helper'
 describe Video, type: :model do
   describe 'associations' do
     it { should belong_to(:category).class_name('Category') }
+    it { should have_many(:reviews) }
+
+    it 'should order reviews by the most recent first' do
+      video = Fabricate(:video)
+      Fabricate(:review, video: video, rating: 4, created_at: 3.days.ago)
+      review2 = Fabricate(:review, video: video, rating: 4)
+      expect(video.reviews.first).to eq review2
+    end
   end
 
   describe 'validations' do
@@ -46,6 +54,19 @@ describe Video, type: :model do
     it 'should return an empty array if query empty' do
       videos = Video.search_by_title ''
       expect(videos).to match_array []
+    end
+  end
+  describe '#review_average' do
+    let(:video) { Fabricate(:video) }
+    it 'should calculate the average rating for all reviews' do
+      Fabricate.times(3, :review, video: video, rating: 4)
+      expect(video.rating_average).to eq 4
+    end
+
+    it 'should calculate another rating' do
+      Fabricate.times(2, :review, video: video, rating: 3)
+      Fabricate(:review, video: video, rating: 2)
+      expect(video.rating_average).to eq 2.7
     end
   end
 end

@@ -18,6 +18,12 @@ describe VideosController, type: :controller do
                    session: { current_user_id: user.to_param }
         expect(assigns(:video)).to eq video
       end
+
+      it 'should set @review' do
+        get :show, params: { id: video.to_param },
+                   session: { current_user_id: user.to_param }
+        expect(assigns(:review)).to be_instance_of Review
+      end
     end
   end
 

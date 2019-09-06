@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   resources :sessions, only: :create
   resources :users, only: :create
   resources :videos, only: :show do
+    resources :reviews, only: :create
     get 'search', on: :collection
   end
 end

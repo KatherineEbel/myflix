@@ -22,21 +22,23 @@ describe UsersController, type: :controller do
   end
 
   describe 'POST #create' do
-    let(:user_data) { Fabricate.attributes_for(:user) }
-    it 'should set @user' do
-      post :create, params: { user: user_data }
-      expect(assigns(:user)).to be_instance_of(User)
-    end
     context 'valid form' do
+      let(:user_data) { Fabricate.attributes_for(:user) }
       before do
         post :create,
              params: { user: user_data }
       end
+
+      it 'should set @user' do
+        expect(assigns(:user)).to be_instance_of(User)
+      end
+
       it 'should create the user' do
         user = User.find_by_email(user_data[:email])
         expect(user).to_not be_nil
         expect(user.full_name).to eq user_data[:full_name]
       end
+
       it 'should should redirect to sign_in_path' do
         expect(response).to redirect_to sign_in_path
       end
@@ -45,8 +47,10 @@ describe UsersController, type: :controller do
         expect(flash[:success]).to be_present
       end
     end
+
     context 'invalid form' do
       before do
+        User.destroy_all
         post :create, params: {
           user: {
             email: '',
@@ -57,7 +61,7 @@ describe UsersController, type: :controller do
       end
 
       it 'should not create the user' do
-        expect(User.count).to be 0
+        expect(User.count).to eq 0
       end
       it 'should render new template' do
         expect(response).to render_template :new

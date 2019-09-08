@@ -3,6 +3,7 @@ require 'rails_helper'
 describe User, type: :model do
   describe 'associations' do
     it { should have_many(:reviews) }
+    it { should have_many(:queue_items) }
   end
   describe 'validations' do
     it { should have_secure_password }

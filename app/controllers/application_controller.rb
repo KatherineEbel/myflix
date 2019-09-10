@@ -10,6 +10,6 @@ class ApplicationController < ActionController::Base
   end
 
   def require_user
-    redirect_to root_path, flash: { warning: 'You must be signed do that.' } unless logged_in?
+    redirect_to root_path, flash: { warning: 'Unauthorized' } unless logged_in?
   end
 end

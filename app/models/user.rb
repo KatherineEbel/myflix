@@ -5,5 +5,6 @@ class User < ApplicationRecord
   validates_uniqueness_of :email
 
   has_many :queue_items
+  accepts_nested_attributes_for :queue_items
   has_many :reviews
 end

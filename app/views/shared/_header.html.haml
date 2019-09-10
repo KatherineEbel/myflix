@@ -11,7 +11,7 @@
     .collapse.navbar-collapse.d-flex.justify-content-around#nav_menu
       .navbar-nav.d-flex.align-items-center
         = link_to "Videos", '/home'
-        = link_to "My Queue"
+        = link_to "My Queue", my_queue_path
         = link_to "People"
       .form-inline.mr-2.ml-lg-5
         = form_tag(search_videos_path, method: :get) do

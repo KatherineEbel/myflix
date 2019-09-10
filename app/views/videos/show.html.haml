@@ -1,16 +1,18 @@
 %article.video
-  .container
-    .row
-      .video_large_cover.col-sm-7.col-sm-offset-1
-        = image_tag @video.large_cover_url
-      .video_info.col-sm-3
-        %header
-          %h3= @video.title
-          %span= "Review: #{@video.rating_average}/5.0"
-        %p= @video.description
-        .actions
-          %a.btn.btn-primary(href="") Watch Now
-          %a.btn.btn-default(href="") + My Queue
+  .container.d-lg-flex
+    .video_large_cover
+      = image_tag @video.large_cover_url
+    .video_info.mt-sm-3
+      %header
+        %h3= @video.title
+        %span= "Review: #{@video.rating_average}/5.0"
+      %p= @video.description
+      .d-flex
+        %a.btn.btn-primary.mr-sm-2(href="") Watch Now
+        = link_to '+ My Queue',
+         video_queue_items_path(@video),
+          class: 'btn btn-secondary',
+          method: :post
 
 %section.reviews.container
   = bootstrap_form_with(model: [@video, @review],

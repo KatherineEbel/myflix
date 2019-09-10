@@ -1,13 +1,37 @@
                                Prefix Verb   URI Pattern                                                                              Controller#Action
                                  root GET    /                                                                                        pages#front
                                  home GET    /home(.:format)                                                                          videos#index
+                             my_queue GET    /my_queue(.:format)                                                                      queue_items#index
                              register GET    /register(.:format)                                                                      users#new
                               sign_in GET    /sign_in(.:format)                                                                       sessions#new
                              sign_out GET    /sign_out(.:format)                                                                      sessions#destroy
-                                      GET    /ui(/:action)(.:format)                                                                  ui#:action
+                                   ui GET    /ui(.:format)                                                                            ui#index
+              ui_admin_views_payments GET    /ui/admin_views_payments(.:format)                                                       ui#admin_views_payments
+            ui_confirm_password_reset GET    /ui/confirm_password_reset(.:format)                                                     ui#confirm_password_reset
+                   ui_admin_add_video GET    /ui/admin_add_video(.:format)                                                            ui#admin_add_video
+                             ui_video GET    /ui/video(.:format)                                                                      ui#video
+                              ui_home GET    /ui/home(.:format)                                                                       ui#home
+                              ui_user GET    /ui/user(.:format)                                                                       ui#user
+                   ui_forgot_password GET    /ui/forgot_password(.:format)                                                            ui#forgot_password
+                            ui_people GET    /ui/people(.:format)                                                                     ui#people
+                  ui_plan_and_billing GET    /ui/plan_and_billing(.:format)                                                           ui#plan_and_billing
+                             ui_genre GET    /ui/genre(.:format)                                                                      ui#genre
+                           ui_account GET    /ui/account(.:format)                                                                    ui#account
+                             ui_front GET    /ui/front(.:format)                                                                      ui#front
+                             ui_index GET    /ui/index(.:format)                                                                      ui#index
+                          ui_my_queue GET    /ui/my_queue(.:format)                                                                   ui#my_queue
+                   ui_advanced_search GET    /ui/advanced_search(.:format)                                                            ui#advanced_search
+                    ui_reset_password GET    /ui/reset_password(.:format)                                                             ui#reset_password
+                           ui_sign_in GET    /ui/sign_in(.:format)                                                                    ui#sign_in
+                            ui_invite GET    /ui/invite(.:format)                                                                     ui#invite
+                          ui_register GET    /ui/register(.:format)                                                                   ui#register
+                     ui_invalid_token GET    /ui/invalid_token(.:format)                                                              ui#invalid_token
                              category GET    /categories/:id(.:format)                                                                categories#show
+                          queue_items PATCH  /queue_items/update(.:format)                                                            queue_items#update
+                           queue_item DELETE /queue_items/:id(.:format)                                                               queue_items#destroy
                              sessions POST   /sessions(.:format)                                                                      sessions#create
                                 users POST   /users(.:format)                                                                         users#create
+                    video_queue_items POST   /videos/:video_id/queue_items(.:format)                                                  queue_items#create
                         video_reviews POST   /videos/:video_id/reviews(.:format)                                                      reviews#create
                         search_videos GET    /videos/search(.:format)                                                                 videos#search
                                 video GET    /videos/:id(.:format)                                                                    videos#show

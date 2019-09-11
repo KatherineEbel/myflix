@@ -43,9 +43,7 @@ describe UsersController, type: :controller do
         expect(response).to redirect_to sign_in_path
       end
 
-      it 'should set flash[:success] message' do
-        expect(flash[:success]).to be_present
-      end
+      it_behaves_like 'flash[:success] message'
     end
 
     context 'invalid form' do
@@ -67,9 +65,7 @@ describe UsersController, type: :controller do
         expect(response).to render_template :new
       end
 
-      it 'should set flash[:danger] message' do
-        expect(flash[:danger]).to be_present
-      end
+      it_behaves_like 'flash[:danger] message'
     end
   end
 end

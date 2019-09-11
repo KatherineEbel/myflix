@@ -33,7 +33,6 @@ class QueueItemsController < ApplicationController
                   .require(:user)[:queue_items_attributes]
     begin
       QueueItem.update_queue(item_params, current_user.id)
-      QueueItem.update_reviews(item_params)
       flash[:info] = 'Your queue was updated'
     rescue ActiveRecord::RecordNotFound, ActiveRecord::RecordInvalid
       flash[:danger] = 'Operation failed'

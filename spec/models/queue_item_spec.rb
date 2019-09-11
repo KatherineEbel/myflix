@@ -32,6 +32,44 @@ describe QueueItem, type: :model do
     end
   end
 
+  describe '#rating' do
+    context 'user has review for video' do
+      let(:user) { Fabricate(:user) }
+      it 'should return the rating' do
+        review = Fabricate(:review, reviewer: user, rating: 6)
+        queue_item = Fabricate(:queue_item, user: user, video: review.video)
+        expect(queue_item.rating).to eq review.rating
+      end
+    end
+
+    context 'user has not reviewed video' do
+      let(:user) { Fabricate(:user) }
+      it 'should return nil' do
+        queue_item = Fabricate(:queue_item, user: user)
+        expect(queue_item.rating).to be_nil
+      end
+    end
+  end
+
+  describe '#review=' do
+    let(:user) { Fabricate(:user) }
+    it 'should create a new review if user does not have one for this video' do
+      queue_item = Fabricate(:queue_item, user: user)
+      queue_item.rating = '5'
+      expect(user.reviews.count).to eq 1
+      expect(queue_item.rating).to eq user.reviews.first.rating
+    end
+
+    it 'should update existing review with new rating' do
+      queue_item = Fabricate(:queue_item, user: user)
+      user.reviews << Fabricate(:review, video: queue_item.video)
+
+      queue_item.rating = 3
+      expect(user.reviews.count).to eq 1
+      expect(user.reviews.first.rating).to eq 3
+    end
+  end
+
   describe 'after_create' do
     it 'should set the priority to one if it is the first queue item' do
       queue_item = Fabricate(:queue_item, priority: nil)
@@ -55,7 +93,7 @@ describe QueueItem, type: :model do
     end
   end
 
-  describe '::update_priorities' do
+  describe '::update_queue' do
     it 'should save updated priority values for given values' do
       user = Fabricate(:user)
       video = Fabricate(:video)
@@ -64,7 +102,7 @@ describe QueueItem, type: :model do
       item2 = Fabricate(:queue_item, user: user, video: video2)
       attributes = { '0': { priority: 6, id: item1.to_param },
                      '1': { priority: 2, id: item2.to_param } }
-      QueueItem.update_priorities(attributes, user.id)
+      QueueItem.update_queue(attributes, user.id)
       expect(QueueItem.find(item1.to_param).priority).to eq 2
       expect(QueueItem.find(item2.to_param).priority).to eq 1
     end
@@ -79,7 +117,7 @@ describe QueueItem, type: :model do
         queue_item2 = Fabricate(:queue_item, user: bob, video: video2)
         attributes = { '0': { priority: 3, id: queue_item1.to_param },
                        '1': { priority: 2, id: queue_item2.to_param } }
-        expect { QueueItem.update_priorities(attributes, current_user.id) }
+        expect { QueueItem.update_queue(attributes, current_user.id) }
           .to raise_error ActiveRecord::RecordInvalid
       end
     end
@@ -93,11 +131,43 @@ describe QueueItem, type: :model do
         queue_item2 = Fabricate(:queue_item, user: current_user, video: video2)
         attributes = { '0': { priority: 3.5, id: queue_item1.to_param },
                        '1': { priority: 2, id: queue_item2.to_param } }
-        expect { QueueItem.update_priorities(attributes, current_user.id) }
+        expect { QueueItem.update_queue(attributes, current_user.id) }
           .to raise_error ActiveRecord::RecordInvalid
       end
     end
+
+    context 'udpating reviews' do
+      before do
+        # this is here because extra queue items somehow in database
+        QueueItem.destroy_all
+      end
+      context 'user has not reviewed video' do
+        let(:user) { Fabricate(:user) }
+        it 'should add new reviews using given item attributes' do
+          Fabricate.times(2, :queue_item, user: user)
+          item_attributes = { '0': { priority: 1, rating: 5, id: QueueItem.first.id },
+                              '1': { priority: 2, rating: 3, id: QueueItem.second.id } }
+          QueueItem.update_queue(item_attributes, user.id)
+          expect(user.reviews.map(&:rating)).to match_array [5, 3]
+        end
+      end
+
+      context 'user has review for one video but not another' do
+        let(:user) { Fabricate(:user) }
+        it 'should update or create review as needed' do
+          Fabricate.times(3, :queue_item, user: user)
+          item_attributes = { '0': { priority: 1, rating: '', id: user.queue_items.first.id },
+                              '1': { priority: 2, rating: '', id: user.queue_items.second.id },
+                              '2': { priority: 3, rating: 4, id: user.queue_items.third.id } }
+          QueueItem.update_queue(item_attributes, user.id)
+          expect(user.reviews.count).to eq 1
+          expect(user.reviews.first.rating).to eq 4
+        end
+      end
+    end
   end
+
+
 
   describe '::invalid_update?' do
     it 'should return false if user_id the same as item.user.id' do
@@ -189,7 +259,6 @@ describe QueueItem, type: :model do
           .to raise_error(ActiveRecord::RecordInvalid)
       end
     end
-
   end
 
   describe '::normalize_priorities' do

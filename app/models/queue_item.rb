@@ -10,11 +10,23 @@ class QueueItem < ApplicationRecord
     category.name
   end
 
+  def rating
+    review&.rating
+  end
+
+  def rating=(value)
+    if review
+      review.update(rating: value)
+    else
+      user.reviews << Review.create(rating: value, video: video)
+    end
+  end
+
   def video_title
     title
   end
 
-  def self.update_priorities(items_attributes, user_id)
+  def self.update_queue(items_attributes, user_id)
     queue_items = sort_by_priority(changed_items(items_attributes, user_id))
     normalize_priorities(queue_items)
   end
@@ -28,6 +40,7 @@ class QueueItem < ApplicationRecord
         raise ActiveRecord::RecordNotFound if item.nil?
 
         item.priority = attributes[:priority]
+        item.rating = attributes[:rating] if attributes[:rating]
         raise ActiveRecord::RecordInvalid if invalid_update? item, user_id
 
         item
@@ -55,5 +68,9 @@ class QueueItem < ApplicationRecord
 
   def calculate_priority
     update(priority: QueueItem.where(user: user).count)
+  end
+
+  def review
+    @review ||= user.reviews.where(video: video).first
   end
 end

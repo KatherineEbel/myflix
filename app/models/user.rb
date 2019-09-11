@@ -7,4 +7,8 @@ class User < ApplicationRecord
   has_many :queue_items
   accepts_nested_attributes_for :queue_items
   has_many :reviews
+
+  def review_for(video)
+    reviews.where(video: video).first
+  end
 end

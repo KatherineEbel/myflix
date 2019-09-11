@@ -149,79 +149,72 @@ describe QueueItemsController, type: :controller do
     context 'logged in user' do
       let(:current_user) { Fabricate(:user) }
       before do
-        video1 = Fabricate(:video)
-        video2 = Fabricate(:video)
-        video3 = Fabricate(:video)
-        item1 = Fabricate(:queue_item, video: video1, user: current_user)
-        item2 = Fabricate(:queue_item, video: video2, user: current_user)
-        item3 = Fabricate(:queue_item, video: video3, user: current_user)
+        Fabricate.times(3, :queue_item, user: current_user)
         patch :update,
               params: { user: { queue_items_attributes:
                           {
-                            "0": { priority: 6, id: item1.to_param },
-                            "1": { priority: 2, id: item2.to_param },
-                            "2": { priority: 3, id: item3.to_param }
+                            "0": { priority: 6, id: current_user.queue_items.first.to_param },
+                            "1": { priority: 2, id: current_user.queue_items.second.to_param },
+                            "2": { priority: 3, id: current_user.queue_items.third.to_param }
                           } } },
               session: { current_user_id: current_user.to_param }
       end
 
-      it 'should update queue with the correct priorities' do
-        expect(User.find(current_user.to_param)
-                 .queue_items.first.priority).to eq 3
-        expect(User.find(current_user.to_param)
-                 .queue_items.last.priority).to eq 2
+      context 'updating priorities and reviews' do
+        it 'should redirect to my_queue path' do
+          expect(response).to redirect_to my_queue_path
+        end
+
+        it 'should display flash[:info] for successful update' do
+          expect(flash[:info]).to be_present
+        end
       end
 
-      it 'should redirect to my_queue path' do
-        expect(response).to redirect_to my_queue_path
-      end
-    end
+      context 'different user' do
+        let(:current_user) { Fabricate(:user) }
+        it 'should not update priorities' do
+          bob = Fabricate(:user)
+          Fabricate.times(2, :queue_item, user: bob)
+          attributes = { '0': { priority: 3, review: 4, id: bob.queue_items.first.to_param },
+                         '1': { priority: 2, review: '', id: bob.queue_items.second.to_param } }
+          patch :update,
+                params:
+                         { user: { queue_items_attributes: attributes } },
+                session: { current_user_id: current_user.to_param }
+          expect(bob.queue_items.first.priority).to eq 1
+          expect(bob.reviews.count).to eq 0
+        end
 
-    context 'different user' do
-      let(:current_user) { Fabricate(:user) }
-      it 'should not update priorities' do
-        video = Fabricate(:video)
-        video2 = Fabricate(:video)
-        bob = Fabricate(:user)
-        queue_item1 = Fabricate(:queue_item, user: bob, video: video)
-        queue_item2 = Fabricate(:queue_item, user: bob, video: video2)
-        attributes = { '0': { priority: 3, id: queue_item1.to_param },
-                       '1': { priority: 2, id: queue_item2.to_param } }
-        patch :update,
-              params:
-                       { user: { queue_items_attributes: attributes } },
-              session: { current_user_id: current_user.to_param }
-        expect(queue_item1.reload.priority).to eq 1
+        it 'should display flash[:danger] message' do
+          video = Fabricate(:video)
+          video2 = Fabricate(:video)
+          bob = Fabricate(:user)
+          queue_item1 = Fabricate(:queue_item, user: bob, video: video)
+          queue_item2 = Fabricate(:queue_item, user: bob, video: video2)
+          attributes = { '0': { priority: 3, id: queue_item1.to_param },
+                         '1': { priority: 2, id: queue_item2.to_param } }
+          patch :update,
+                params:
+                         { user: { queue_items_attributes: attributes } },
+                session: { current_user_id: current_user.to_param }
+          expect(flash[:danger]).to be_present
+        end
       end
-      it 'should display flash[:danger] message' do
-        video = Fabricate(:video)
-        video2 = Fabricate(:video)
-        bob = Fabricate(:user)
-        queue_item1 = Fabricate(:queue_item, user: bob, video: video)
-        queue_item2 = Fabricate(:queue_item, user: bob, video: video2)
-        attributes = { '0': { priority: 3, id: queue_item1.to_param },
-                       '1': { priority: 2, id: queue_item2.to_param } }
-        patch :update,
-              params:
-                       { user: { queue_items_attributes: attributes } },
-              session: { current_user_id: current_user.to_param }
-        expect(flash[:danger]).to be_present
-      end
-    end
 
-    context 'jnvalid input' do
-      let(:current_user) { Fabricate(:user) }
-      let(:video_1) { Fabricate(:video) }
-      let(:video_2) { Fabricate(:video) }
-      let(:queue_item1) { Fabricate(:queue_item, user: current_user, video: video_1) }
-      let(:queue_item2) { Fabricate(:queue_item, user: current_user, video: video_2) }
+      context 'invalid input' do
+        let(:current_user) { Fabricate(:user) }
+        let(:video_1) { Fabricate(:video) }
+        let(:video_2) { Fabricate(:video) }
+        let(:queue_item1) { Fabricate(:queue_item, user: current_user, video: video_1) }
+        let(:queue_item2) { Fabricate(:queue_item, user: current_user, video: video_2) }
 
-      it 'should not update the values' do
-        attributes = { '0': { priority: 3, id: queue_item1.to_param },
-                       '1': { priority: 2, id: queue_item2.to_param } }
-        patch :update, params: { user: { queue_items_attributes: attributes } },
-                       session: { current_user_id: current_user.to_param }
-        expect(queue_item2.reload.priority).to eq 1
+        it 'should not update the values' do
+          attributes = { '0': { priority: 3, id: queue_item1.to_param },
+                         '1': { priority: 2, id: queue_item2.to_param } }
+          patch :update, params: { user: { queue_items_attributes: attributes } },
+                         session: { current_user_id: current_user.to_param }
+          expect(queue_item2.reload.priority).to eq 1
+        end
       end
     end
   end

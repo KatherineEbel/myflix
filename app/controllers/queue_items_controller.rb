@@ -29,13 +29,17 @@ class QueueItemsController < ApplicationController
   end
 
   def update
+    item_params = params
+                  .require(:user)[:queue_items_attributes]
     begin
-      QueueItem
-        .update_priorities(params.require(:user)[:queue_items_attributes],
-                           current_user.id)
+      QueueItem.update_queue(item_params, current_user.id)
+      QueueItem.update_reviews(item_params)
+      flash[:info] = 'Your queue was updated'
     rescue ActiveRecord::RecordNotFound, ActiveRecord::RecordInvalid
       flash[:danger] = 'Operation failed'
     end
     redirect_to my_queue_path
   end
+
+  def update_ratings; end
 end

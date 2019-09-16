@@ -9,10 +9,11 @@
       %p= @video.description
       .d-flex
         %a.btn.btn-primary.mr-sm-2(href="") Watch Now
-        = link_to '+ My Queue',
-         video_queue_items_path(@video),
-          class: 'btn btn-secondary',
-          method: :post
+        - unless current_user.queued? @video
+          = link_to '+ My Queue',
+           video_queue_items_path(@video),
+            class: 'btn btn-secondary',
+            method: :post
 
 %section.reviews.container
   = bootstrap_form_with(model: [@video, @review],

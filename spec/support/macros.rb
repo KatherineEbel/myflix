@@ -8,7 +8,6 @@ def current_user
 end
 
 def clear_current_user
-  User.destroy(session[:current_user_id])
   session[:current_user_id] = nil
 end
 

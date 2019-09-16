@@ -41,4 +41,20 @@ describe User, type: :model do
       expect(user.queued?(video)).to be false
     end
   end
+
+  describe '#gravatar_url' do
+    it 'should return users email combined with hash' do
+      user = Fabricate(:user)
+      expect(user.gravatar_url).to match(%r(^https://www.gravatar.com/avatar))
+    end
+
+    it 'should use 40 as default size if not passed in' do
+      user = Fabricate(:user)
+      expect(user.gravatar_url).to match(%r(^https://www.gravatar.com/avatar/\w+\?size=40$))
+    end
+    it 'should include the size if passed in' do
+      user = Fabricate(:user)
+      expect(user.gravatar_url(size: 200)).to match(%r(^https://www.gravatar.com/avatar/\w+\?size=200$))
+    end
+  end
 end

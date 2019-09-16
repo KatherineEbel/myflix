@@ -15,4 +15,9 @@ class User < ApplicationRecord
   def queued?(video)
     !queue_items.find_by(video: video).nil?
   end
+
+  def gravatar_url(size: 40)
+    hash = Digest::MD5.hexdigest(email)
+    "https://www.gravatar.com/avatar/#{hash}?size=#{size}"
+  end
 end

@@ -32,6 +32,8 @@
         %li.review.row
           .col-sm-2
             %span Review: #{review.rating} / 5
-            %p by <a href="">#{review.reviewer.full_name}</a>
+            %p
+              by
+              = link_to review.reviewer.full_name, profile_user_path(review.reviewer)
           .col-sm-8
             %p= review.text

@@ -30,6 +30,7 @@
                           queue_items PATCH  /queue_items/update(.:format)                                                            queue_items#update
                            queue_item DELETE /queue_items/:id(.:format)                                                               queue_items#destroy
                              sessions POST   /sessions(.:format)                                                                      sessions#create
+                         profile_user GET    /users/:id/profile(.:format)                                                             users#profile
                                 users POST   /users(.:format)                                                                         users#create
                     video_queue_items POST   /videos/:video_id/queue_items(.:format)                                                  queue_items#create
                         video_reviews POST   /videos/:video_id/reviews(.:format)                                                      reviews#create

@@ -68,4 +68,27 @@ describe UsersController, type: :controller do
       it_behaves_like 'flash[:danger] message'
     end
   end
+
+  describe 'GET #profile' do
+    context 'anonymous user' do
+      before { clear_current_user }
+      it_behaves_like 'require_sign_in' do
+        sydney = Fabricate(:user)
+        let(:action) { get :profile, params: { id: sydney.id } }
+      end
+    end
+
+    context 'user logged in' do
+      let(:sydney) { Fabricate(:user) }
+      before do
+        set_current_user
+        3.times { sydney.queue_items << Fabricate(:queue_item) }
+        get :profile, params: { id: sydney.id }
+      end
+
+      it 'should set @user' do
+        expect(assigns(:user)).to eq sydney
+      end
+    end
+  end
 end

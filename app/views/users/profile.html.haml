@@ -25,13 +25,4 @@
       %header
         %h3 #{@user.full_name}'s Reviews (#{@user.reviews.count})
       %ul
-        - @user.reviews.each do |review|
-          %article.review
-            %li.row
-              .col-sm-2
-                %p
-                  = link_to review.video.title, video_path(review.video)
-                - if review.rating
-                  %col Review: #{review.rating} / 5
-              .col-sm-8
-                %p= review.text
+        = render @user.reviews

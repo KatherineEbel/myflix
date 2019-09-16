@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe User, type: :model do
   describe 'associations' do
-    it { should have_many(:reviews) }
+    it { should have_many(:reviews).order('created_at DESC') }
     it { should have_many(:queue_items) }
   end
   describe 'validations' do

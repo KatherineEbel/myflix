@@ -11,4 +11,8 @@ class User < ApplicationRecord
   def review_for(video)
     reviews.where(video: video).first
   end
+
+  def queued?(video)
+    !queue_items.find_by(video: video).nil?
+  end
 end

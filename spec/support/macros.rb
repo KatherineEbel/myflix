@@ -12,6 +12,11 @@ def clear_current_user
   session[:current_user_id] = nil
 end
 
-def new_user
-  Fabricate(:user)
+def sign_in(user=nil)
+  user ||= Fabricate(:user)
+  visit sign_in_path
+  fill_in 'Email', with: user.email
+  fill_in 'Password', with: user.password
+  click_button 'Sign In'
+  expect(page).to have_current_path(home_path)
 end

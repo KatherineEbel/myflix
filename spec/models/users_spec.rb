@@ -27,4 +27,18 @@ describe User, type: :model do
       expect(result).to be_nil
     end
   end
+
+  describe '#queued?' do
+    it 'should return true if the video is already in queue' do
+      user = Fabricate(:user)
+      queue_item = Fabricate(:queue_item, user: user)
+      expect(user.queued?(queue_item.video)).to be true
+    end
+
+    it 'should return false if the video is not in users queue' do
+      user = Fabricate(:user)
+      video = Fabricate(:video)
+      expect(user.queued?(video)).to be false
+    end
+  end
 end

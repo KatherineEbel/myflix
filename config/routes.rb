@@ -24,7 +24,11 @@ Rails.application.routes.draw do
     patch 'update', on: :collection
   end
   resources :sessions, only: :create
-  resources :users, only: :create
+
+  resources :users, only: [:create] do
+    get 'profile', on: :member
+  end
+
   resources :videos, only: :show do
     resources :queue_items, only: :create
     resources :reviews, only: :create

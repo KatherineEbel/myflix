@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
+  before_action :require_user, only: :profile
   def new
     redirect_to home_path if logged_in?
     @user = User.new
@@ -15,5 +16,9 @@ class UsersController < ApplicationController
       render :new
       flash[:danger] = 'Correct errors and try again.'
     end
+  end
+
+  def profile
+    @user = User.find params[:id]
   end
 end

@@ -24,6 +24,10 @@ class User < ApplicationRecord
     "https://www.gravatar.com/avatar/#{hash}?size=#{size}"
   end
 
+  def can_follow?(other_user)
+    !other_user.eql?(self) && !following?(other_user)
+  end
+
   def follow!(other_user)
     followees << other_user
   end
@@ -34,6 +38,6 @@ class User < ApplicationRecord
 
   def unfollow?(other_user)
     followed_users.destroy_by(follower_id: self, followee_id: other_user)
-                  .first&.followee.eql? other_user || false
+                  .first&.followee.eql?(other_user) || false
   end
 end

@@ -223,7 +223,7 @@ Metrics/BlockLength:
   Description: Limit size of blocks.
   Enabled: true
   Max: 20
-  ExcludedMethods: ['describe', 'context']
+  ExcludedMethods: ['describe', 'context', 'feature']
 
 Metrics/ClassLength:
   Description: 'Avoid classes longer than 100 lines of code.'

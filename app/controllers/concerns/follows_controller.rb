@@ -6,7 +6,7 @@ class FollowsController < ApplicationController
       flash[:danger] = "Error following #{followee.full_name}. Are you already following them?"
     else
       flash[:success] = "You are following #{followee.full_name}"
-      current_user.followees << followee
+      current_user.follow! followee
     end
     redirect_back(fallback_location: profile_user_path(followee))
   end

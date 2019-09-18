@@ -62,6 +62,26 @@ describe User, type: :model do
     end
   end
 
+  describe '#can_follow?' do
+    it { should respond_to :can_follow? }
+
+    it 'should return true if other user not self' do
+      user = Fabricate(:user)
+      expect(user.can_follow?(user)).to be false
+    end
+
+    it 'should return true if self is not following other user' do
+      user = Fabricate(:user)
+      expect(user.can_follow?(Fabricate(:user))).to be true
+    end
+
+    it 'should return false if self is already following other user' do
+      user = Fabricate(:user)
+      other_user = Fabricate(:user)
+      user.follow! other_user
+      expect(user.can_follow?(other_user)).to be false
+    end
+  end
   describe '#follow!' do
     it { should respond_to :follow! }
     context 'user is not following other user' do

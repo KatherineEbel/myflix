@@ -5,7 +5,7 @@
         %header
           %img{src: @user.gravatar_url, alt: @user.full_name}
           %h2 #{@user.full_name} 's video collections (#{@user.queue_items.count})
-          %button.btn.btn-default Follow
+          = button_to 'Follow', follows_path, method: :post, params: { id: params[:id] }, class: 'btn btn-success'
         %table.table
           %thead
             %tr

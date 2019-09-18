@@ -3,7 +3,10 @@ class User < ApplicationRecord
 
   validates_presence_of :email, :full_name, :password_digest
   validates_uniqueness_of :email
-
+  has_many :followed_users, foreign_key: :follower_id, class_name: 'Follow'
+  has_many :followees, through: :followed_users
+  has_many :following_users, foreign_key: :followee_id, class_name: 'Follow'
+  has_many :followers, through: :following_users
   has_many :queue_items
   accepts_nested_attributes_for :queue_items
   has_many :reviews, -> { order('created_at DESC') }
@@ -19,5 +22,13 @@ class User < ApplicationRecord
   def gravatar_url(size: 40)
     hash = Digest::MD5.hexdigest(email)
     "https://www.gravatar.com/avatar/#{hash}?size=#{size}"
+  end
+
+  def follow!(other_user)
+    followees << other_user
+  end
+
+  def following?(other_user)
+    followees.include? other_user
   end
 end

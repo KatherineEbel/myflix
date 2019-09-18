@@ -19,13 +19,14 @@
     <database id="5" parent="1" name="myflix_development">
       <ObjectId>24681</ObjectId>
       <Owner>katherineebel</Owner>
-      <IntrospectionStateNumber>809</IntrospectionStateNumber>
+      <IntrospectionStateNumber>4632</IntrospectionStateNumber>
       <Current>1</Current>
       <Relations>sequence|table|24699|24701|1
 sequence|table|24710|24712|1
 sequence|table|24721|24723|1
 sequence|table|24732|24734|1
 sequence|table|24743|24745|1
+sequence|table|24820|24822|1
 </Relations>
     </database>
     <database id="6" parent="1" name="myflix_test">
@@ -128,7 +129,7 @@ sequence|table|24743|24745|1
       <Comment>standard public schema</Comment>
       <StateNumber>359</StateNumber>
       <Owner>katherineebel</Owner>
-      <IntrospectionStateNumber>810</IntrospectionStateNumber>
+      <IntrospectionStateNumber>4633</IntrospectionStateNumber>
       <Current>1</Current>
     </schema>
     <access-method id="26" parent="5" name="btree">
@@ -195,7 +196,15 @@ sequence|table|24743|24745|1
       <CacheSize>1</CacheSize>
       <DataType>bigint</DataType>
     </sequence>
-    <sequence id="34" parent="25" name="queue_items_id_seq">
+    <sequence id="34" parent="25" name="follows_id_seq">
+      <ObjectId>24820</ObjectId>
+      <StateNumber>4631</StateNumber>
+      <Owner>katherineebel</Owner>
+      <SequenceIdentity>1</SequenceIdentity>
+      <CacheSize>1</CacheSize>
+      <DataType>bigint</DataType>
+    </sequence>
+    <sequence id="35" parent="25" name="queue_items_id_seq">
       <ObjectId>24743</ObjectId>
       <StateNumber>698</StateNumber>
       <Owner>katherineebel</Owner>
@@ -203,7 +212,7 @@ sequence|table|24743|24745|1
       <CacheSize>1</CacheSize>
       <DataType>bigint</DataType>
     </sequence>
-    <sequence id="35" parent="25" name="reviews_id_seq">
+    <sequence id="36" parent="25" name="reviews_id_seq">
       <ObjectId>24732</ObjectId>
       <StateNumber>697</StateNumber>
       <Owner>katherineebel</Owner>
@@ -211,7 +220,7 @@ sequence|table|24743|24745|1
       <CacheSize>1</CacheSize>
       <DataType>bigint</DataType>
     </sequence>
-    <sequence id="36" parent="25" name="users_id_seq">
+    <sequence id="37" parent="25" name="users_id_seq">
       <ObjectId>24721</ObjectId>
       <StateNumber>696</StateNumber>
       <Owner>katherineebel</Owner>
@@ -219,7 +228,7 @@ sequence|table|24743|24745|1
       <CacheSize>1</CacheSize>
       <DataType>bigint</DataType>
     </sequence>
-    <sequence id="37" parent="25" name="videos_id_seq">
+    <sequence id="38" parent="25" name="videos_id_seq">
       <ObjectId>24699</ObjectId>
       <StateNumber>693</StateNumber>
       <Owner>katherineebel</Owner>
@@ -227,83 +236,88 @@ sequence|table|24743|24745|1
       <CacheSize>1</CacheSize>
       <DataType>bigint</DataType>
     </sequence>
-    <table id="38" parent="25" name="ar_internal_metadata">
+    <table id="39" parent="25" name="ar_internal_metadata">
       <ObjectId>24691</ObjectId>
       <Owner>katherineebel</Owner>
       <StateNumber>692</StateNumber>
     </table>
-    <table id="39" parent="25" name="categories">
+    <table id="40" parent="25" name="categories">
       <ObjectId>24712</ObjectId>
       <Owner>katherineebel</Owner>
       <StateNumber>694</StateNumber>
     </table>
-    <table id="40" parent="25" name="queue_items">
+    <table id="41" parent="25" name="follows">
+      <ObjectId>24822</ObjectId>
+      <Owner>katherineebel</Owner>
+      <StateNumber>4631</StateNumber>
+    </table>
+    <table id="42" parent="25" name="queue_items">
       <ObjectId>24745</ObjectId>
       <Owner>katherineebel</Owner>
       <StateNumber>698</StateNumber>
     </table>
-    <table id="41" parent="25" name="reviews">
+    <table id="43" parent="25" name="reviews">
       <ObjectId>24734</ObjectId>
       <Owner>katherineebel</Owner>
       <StateNumber>697</StateNumber>
     </table>
-    <table id="42" parent="25" name="schema_migrations">
+    <table id="44" parent="25" name="schema_migrations">
       <ObjectId>24683</ObjectId>
       <Owner>katherineebel</Owner>
       <StateNumber>691</StateNumber>
     </table>
-    <table id="43" parent="25" name="users">
+    <table id="45" parent="25" name="users">
       <ObjectId>24723</ObjectId>
       <Owner>katherineebel</Owner>
       <StateNumber>696</StateNumber>
     </table>
-    <table id="44" parent="25" name="videos">
+    <table id="46" parent="25" name="videos">
       <ObjectId>24701</ObjectId>
       <Owner>katherineebel</Owner>
       <StateNumber>695</StateNumber>
     </table>
-    <column id="45" parent="38" name="key">
+    <column id="47" parent="39" name="key">
       <Position>1</Position>
       <DataType>varchar|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>692</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="46" parent="38" name="value">
+    <column id="48" parent="39" name="value">
       <Position>2</Position>
       <DataType>varchar|0s</DataType>
       <StateNumber>692</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="47" parent="38" name="created_at">
+    <column id="49" parent="39" name="created_at">
       <Position>3</Position>
       <DataType>timestamp(6)|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>692</StateNumber>
       <TypeId>1114</TypeId>
     </column>
-    <column id="48" parent="38" name="updated_at">
+    <column id="50" parent="39" name="updated_at">
       <Position>4</Position>
       <DataType>timestamp(6)|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>692</StateNumber>
       <TypeId>1114</TypeId>
     </column>
-    <index id="49" parent="38" name="ar_internal_metadata_pkey">
+    <index id="51" parent="39" name="ar_internal_metadata_pkey">
       <ObjectId>24697</ObjectId>
       <StateNumber>692</StateNumber>
       <ColNames>key</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
     </index>
-    <key id="50" parent="38" name="ar_internal_metadata_pkey">
+    <key id="52" parent="39" name="ar_internal_metadata_pkey">
       <ObjectId>24698</ObjectId>
       <StateNumber>692</StateNumber>
       <ColNames>key</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>ar_internal_metadata_pkey</UnderlyingIndexName>
     </key>
-    <column id="51" parent="39" name="id">
+    <column id="53" parent="40" name="id">
       <Position>1</Position>
       <DataType>bigint|0s</DataType>
       <NotNull>1</NotNull>
@@ -311,41 +325,89 @@ sequence|table|24743|24745|1
       <DefaultExpression>nextval(&apos;categories_id_seq&apos;::regclass)</DefaultExpression>
       <TypeId>20</TypeId>
     </column>
-    <column id="52" parent="39" name="name">
+    <column id="54" parent="40" name="name">
       <Position>2</Position>
       <DataType>varchar|0s</DataType>
       <StateNumber>694</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="53" parent="39" name="created_at">
+    <column id="55" parent="40" name="created_at">
       <Position>3</Position>
       <DataType>timestamp(6)|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>694</StateNumber>
       <TypeId>1114</TypeId>
     </column>
-    <column id="54" parent="39" name="updated_at">
+    <column id="56" parent="40" name="updated_at">
       <Position>4</Position>
       <DataType>timestamp(6)|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>694</StateNumber>
       <TypeId>1114</TypeId>
     </column>
-    <index id="55" parent="39" name="categories_pkey">
+    <index id="57" parent="40" name="categories_pkey">
       <ObjectId>24719</ObjectId>
       <StateNumber>694</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
     </index>
-    <key id="56" parent="39" name="categories_pkey">
+    <key id="58" parent="40" name="categories_pkey">
       <ObjectId>24720</ObjectId>
       <StateNumber>694</StateNumber>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>categories_pkey</UnderlyingIndexName>
     </key>
-    <column id="57" parent="40" name="id">
+    <column id="59" parent="41" name="id">
+      <Position>1</Position>
+      <DataType>bigint|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>4631</StateNumber>
+      <DefaultExpression>nextval(&apos;follows_id_seq&apos;::regclass)</DefaultExpression>
+      <TypeId>20</TypeId>
+    </column>
+    <column id="60" parent="41" name="follower_id">
+      <Position>2</Position>
+      <DataType>integer|0s</DataType>
+      <StateNumber>4631</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="61" parent="41" name="followee_id">
+      <Position>3</Position>
+      <DataType>integer|0s</DataType>
+      <StateNumber>4631</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="62" parent="41" name="created_at">
+      <Position>4</Position>
+      <DataType>timestamp(6)|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>4631</StateNumber>
+      <TypeId>1114</TypeId>
+    </column>
+    <column id="63" parent="41" name="updated_at">
+      <Position>5</Position>
+      <DataType>timestamp(6)|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>4631</StateNumber>
+      <TypeId>1114</TypeId>
+    </column>
+    <index id="64" parent="41" name="follows_pkey">
+      <ObjectId>24826</ObjectId>
+      <StateNumber>4631</StateNumber>
+      <ColNames>id</ColNames>
+      <Unique>1</Unique>
+      <Primary>1</Primary>
+    </index>
+    <key id="65" parent="41" name="follows_pkey">
+      <ObjectId>24827</ObjectId>
+      <StateNumber>4631</StateNumber>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>follows_pkey</UnderlyingIndexName>
+    </key>
+    <column id="66" parent="42" name="id">
       <Position>1</Position>
       <DataType>bigint|0s</DataType>
       <NotNull>1</NotNull>
@@ -353,53 +415,53 @@ sequence|table|24743|24745|1
       <DefaultExpression>nextval(&apos;queue_items_id_seq&apos;::regclass)</DefaultExpression>
       <TypeId>20</TypeId>
     </column>
-    <column id="58" parent="40" name="priority">
+    <column id="67" parent="42" name="priority">
       <Position>2</Position>
       <DataType>integer|0s</DataType>
       <StateNumber>698</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="59" parent="40" name="user_id">
+    <column id="68" parent="42" name="user_id">
       <Position>3</Position>
       <DataType>integer|0s</DataType>
       <StateNumber>698</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="60" parent="40" name="video_id">
+    <column id="69" parent="42" name="video_id">
       <Position>4</Position>
       <DataType>integer|0s</DataType>
       <StateNumber>698</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="61" parent="40" name="created_at">
+    <column id="70" parent="42" name="created_at">
       <Position>5</Position>
       <DataType>timestamp(6)|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>698</StateNumber>
       <TypeId>1114</TypeId>
     </column>
-    <column id="62" parent="40" name="updated_at">
+    <column id="71" parent="42" name="updated_at">
       <Position>6</Position>
       <DataType>timestamp(6)|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>698</StateNumber>
       <TypeId>1114</TypeId>
     </column>
-    <index id="63" parent="40" name="queue_items_pkey">
+    <index id="72" parent="42" name="queue_items_pkey">
       <ObjectId>24749</ObjectId>
       <StateNumber>698</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
     </index>
-    <key id="64" parent="40" name="queue_items_pkey">
+    <key id="73" parent="42" name="queue_items_pkey">
       <ObjectId>24750</ObjectId>
       <StateNumber>698</StateNumber>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>queue_items_pkey</UnderlyingIndexName>
     </key>
-    <column id="65" parent="41" name="id">
+    <column id="74" parent="43" name="id">
       <Position>1</Position>
       <DataType>bigint|0s</DataType>
       <NotNull>1</NotNull>
@@ -407,80 +469,80 @@ sequence|table|24743|24745|1
       <DefaultExpression>nextval(&apos;reviews_id_seq&apos;::regclass)</DefaultExpression>
       <TypeId>20</TypeId>
     </column>
-    <column id="66" parent="41" name="rating">
+    <column id="75" parent="43" name="rating">
       <Position>2</Position>
       <DataType>integer|0s</DataType>
       <StateNumber>697</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="67" parent="41" name="text">
+    <column id="76" parent="43" name="text">
       <Position>3</Position>
       <DataType>text|0s</DataType>
       <StateNumber>697</StateNumber>
       <TypeId>25</TypeId>
     </column>
-    <column id="68" parent="41" name="video_id">
+    <column id="77" parent="43" name="video_id">
       <Position>4</Position>
       <DataType>integer|0s</DataType>
       <StateNumber>697</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="69" parent="41" name="user_id">
+    <column id="78" parent="43" name="user_id">
       <Position>5</Position>
       <DataType>integer|0s</DataType>
       <StateNumber>697</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="70" parent="41" name="created_at">
+    <column id="79" parent="43" name="created_at">
       <Position>6</Position>
       <DataType>timestamp(6)|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>697</StateNumber>
       <TypeId>1114</TypeId>
     </column>
-    <column id="71" parent="41" name="updated_at">
+    <column id="80" parent="43" name="updated_at">
       <Position>7</Position>
       <DataType>timestamp(6)|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>697</StateNumber>
       <TypeId>1114</TypeId>
     </column>
-    <index id="72" parent="41" name="reviews_pkey">
+    <index id="81" parent="43" name="reviews_pkey">
       <ObjectId>24741</ObjectId>
       <StateNumber>697</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
     </index>
-    <key id="73" parent="41" name="reviews_pkey">
+    <key id="82" parent="43" name="reviews_pkey">
       <ObjectId>24742</ObjectId>
       <StateNumber>697</StateNumber>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>reviews_pkey</UnderlyingIndexName>
     </key>
-    <column id="74" parent="42" name="version">
+    <column id="83" parent="44" name="version">
       <Position>1</Position>
       <DataType>varchar|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>691</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <index id="75" parent="42" name="schema_migrations_pkey">
+    <index id="84" parent="44" name="schema_migrations_pkey">
       <ObjectId>24689</ObjectId>
       <StateNumber>691</StateNumber>
       <ColNames>version</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
     </index>
-    <key id="76" parent="42" name="schema_migrations_pkey">
+    <key id="85" parent="44" name="schema_migrations_pkey">
       <ObjectId>24690</ObjectId>
       <StateNumber>691</StateNumber>
       <ColNames>version</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>schema_migrations_pkey</UnderlyingIndexName>
     </key>
-    <column id="77" parent="43" name="id">
+    <column id="86" parent="45" name="id">
       <Position>1</Position>
       <DataType>bigint|0s</DataType>
       <NotNull>1</NotNull>
@@ -488,53 +550,53 @@ sequence|table|24743|24745|1
       <DefaultExpression>nextval(&apos;users_id_seq&apos;::regclass)</DefaultExpression>
       <TypeId>20</TypeId>
     </column>
-    <column id="78" parent="43" name="email">
+    <column id="87" parent="45" name="email">
       <Position>2</Position>
       <DataType>varchar|0s</DataType>
       <StateNumber>696</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="79" parent="43" name="full_name">
+    <column id="88" parent="45" name="full_name">
       <Position>3</Position>
       <DataType>varchar|0s</DataType>
       <StateNumber>696</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="80" parent="43" name="password_digest">
+    <column id="89" parent="45" name="password_digest">
       <Position>4</Position>
       <DataType>varchar|0s</DataType>
       <StateNumber>696</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="81" parent="43" name="created_at">
+    <column id="90" parent="45" name="created_at">
       <Position>5</Position>
       <DataType>timestamp(6)|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>696</StateNumber>
       <TypeId>1114</TypeId>
     </column>
-    <column id="82" parent="43" name="updated_at">
+    <column id="91" parent="45" name="updated_at">
       <Position>6</Position>
       <DataType>timestamp(6)|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>696</StateNumber>
       <TypeId>1114</TypeId>
     </column>
-    <index id="83" parent="43" name="users_pkey">
+    <index id="92" parent="45" name="users_pkey">
       <ObjectId>24730</ObjectId>
       <StateNumber>696</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
     </index>
-    <key id="84" parent="43" name="users_pkey">
+    <key id="93" parent="45" name="users_pkey">
       <ObjectId>24731</ObjectId>
       <StateNumber>696</StateNumber>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>users_pkey</UnderlyingIndexName>
     </key>
-    <column id="85" parent="44" name="id">
+    <column id="94" parent="46" name="id">
       <Position>1</Position>
       <DataType>bigint|0s</DataType>
       <NotNull>1</NotNull>
@@ -542,58 +604,58 @@ sequence|table|24743|24745|1
       <DefaultExpression>nextval(&apos;videos_id_seq&apos;::regclass)</DefaultExpression>
       <TypeId>20</TypeId>
     </column>
-    <column id="86" parent="44" name="title">
+    <column id="95" parent="46" name="title">
       <Position>2</Position>
       <DataType>varchar|0s</DataType>
       <StateNumber>693</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="87" parent="44" name="description">
+    <column id="96" parent="46" name="description">
       <Position>3</Position>
       <DataType>text|0s</DataType>
       <StateNumber>693</StateNumber>
       <TypeId>25</TypeId>
     </column>
-    <column id="88" parent="44" name="small_cover_url">
+    <column id="97" parent="46" name="small_cover_url">
       <Position>4</Position>
       <DataType>varchar|0s</DataType>
       <StateNumber>693</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="89" parent="44" name="large_cover_url">
+    <column id="98" parent="46" name="large_cover_url">
       <Position>5</Position>
       <DataType>varchar|0s</DataType>
       <StateNumber>693</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="90" parent="44" name="created_at">
+    <column id="99" parent="46" name="created_at">
       <Position>6</Position>
       <DataType>timestamp(6)|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>693</StateNumber>
       <TypeId>1114</TypeId>
     </column>
-    <column id="91" parent="44" name="updated_at">
+    <column id="100" parent="46" name="updated_at">
       <Position>7</Position>
       <DataType>timestamp(6)|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>693</StateNumber>
       <TypeId>1114</TypeId>
     </column>
-    <column id="92" parent="44" name="category_id">
+    <column id="101" parent="46" name="category_id">
       <Position>8</Position>
       <DataType>integer|0s</DataType>
       <StateNumber>695</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <index id="93" parent="44" name="videos_pkey">
+    <index id="102" parent="46" name="videos_pkey">
       <ObjectId>24708</ObjectId>
       <StateNumber>693</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
     </index>
-    <key id="94" parent="44" name="videos_pkey">
+    <key id="103" parent="46" name="videos_pkey">
       <ObjectId>24709</ObjectId>
       <StateNumber>693</StateNumber>
       <ColNames>id</ColNames>

@@ -2,6 +2,7 @@
                                  root GET    /                                                                                        pages#front
                                  home GET    /home(.:format)                                                                          videos#index
                              my_queue GET    /my_queue(.:format)                                                                      queue_items#index
+                               people GET    /people(.:format)                                                                        follows#show
                              register GET    /register(.:format)                                                                      users#new
                               sign_in GET    /sign_in(.:format)                                                                       sessions#new
                              sign_out GET    /sign_out(.:format)                                                                      sessions#destroy
@@ -27,6 +28,7 @@
                           ui_register GET    /ui/register(.:format)                                                                   ui#register
                      ui_invalid_token GET    /ui/invalid_token(.:format)                                                              ui#invalid_token
                              category GET    /categories/:id(.:format)                                                                categories#show
+                              follows POST   /follows(.:format)                                                                       follows#create
                           queue_items PATCH  /queue_items/update(.:format)                                                            queue_items#update
                            queue_item DELETE /queue_items/:id(.:format)                                                               queue_items#destroy
                              sessions POST   /sessions(.:format)                                                                      sessions#create

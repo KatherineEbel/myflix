@@ -12,6 +12,7 @@ class UsersController < ApplicationController
     if @user.save
       redirect_to sign_in_path
       flash[:success] = 'Registration completed, you can log in now.'
+      UserMailer.with(user: @user).welcome_email.deliver_now
     else
       render :new
       flash[:danger] = 'Correct errors and try again.'

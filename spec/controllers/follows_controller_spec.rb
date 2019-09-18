@@ -49,4 +49,38 @@ describe FollowsController do
       end
     end
   end
+
+  describe 'DESTROY #destroy' do
+    context 'anonymous user' do
+      it_behaves_like 'require_sign_in' do
+        let(:action) { delete :destroy, params: { id: 1 } }
+      end
+    end
+
+    context 'logged in user' do
+      before do
+        set_current_user
+      end
+      context 'success' do
+        let(:other_user) { Fabricate(:user) }
+        before do
+          current_user.follow! other_user
+          delete :destroy, params: { id: other_user.to_param }
+        end
+        it_behaves_like 'flash[:success] message'
+
+        it 'should remove other_user from followees' do
+          expect(current_user.followees).to_not include other_user
+        end
+      end
+
+      context 'other_user not followed' do
+        let(:other_user) { Fabricate(:user) }
+        before do
+          delete :destroy, params: { id: other_user.to_param }
+        end
+        it_behaves_like 'flash[:warning] message'
+      end
+    end
+  end
 end

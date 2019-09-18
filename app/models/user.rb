@@ -31,4 +31,9 @@ class User < ApplicationRecord
   def following?(other_user)
     followees.include? other_user
   end
+
+  def unfollow?(other_user)
+    followed_users.destroy_by(follower_id: self, followee_id: other_user)
+                  .first&.followee.eql? other_user || false
+  end
 end

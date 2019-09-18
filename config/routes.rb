@@ -21,7 +21,7 @@ Rails.application.routes.draw do
   end
 
   resources :categories, only: :show
-  resources :follows, only: :create
+  resources :follows, only: [:create, :destroy]
   resources :queue_items, only: :destroy do
     patch 'update', on: :collection
   end

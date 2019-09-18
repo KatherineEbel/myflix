@@ -18,6 +18,12 @@ shared_examples 'flash[:info] message' do
   end
 end
 
+shared_examples 'flash[:warning] message' do
+  it 'should display flash[:warning]' do
+    expect(flash[:warning]).to be_present
+  end
+end
+
 shared_examples 'flash[:danger] message' do
   it 'should display flash[:danger]' do
     expect(flash[:danger]).to be_present

@@ -98,4 +98,21 @@ describe User, type: :model do
       expect(user.following?(other_user)).to be false
     end
   end
+
+  describe '#unfollow?' do
+    it { should respond_to :unfollow? }
+
+    it 'should return true if other_user is removed from followed_users' do
+      user = Fabricate(:user)
+      other_user = Fabricate(:user)
+      user.follow! other_user
+      expect(user.unfollow?(other_user)).to be true
+    end
+
+    it 'should return false if other_user was not removed from followed_users' do
+      user = Fabricate(:user)
+      other_user = Fabricate(:user)
+      expect(user.unfollow?(other_user)).to be false
+    end
+  end
 end

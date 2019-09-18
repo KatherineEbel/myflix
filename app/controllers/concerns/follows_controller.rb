@@ -14,4 +14,13 @@ class FollowsController < ApplicationController
   def show
     @followees = current_user.followees
   end
+
+  def destroy
+    if current_user.unfollow? User.find params[:id]
+      flash[:success] = "User unfollowed"
+    else
+      flash[:warning] = 'Invalid request'
+    end
+    redirect_to people_path
+  end
 end

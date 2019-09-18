@@ -10,12 +10,12 @@
         %th(width="30%") Unfollow
     %tbody
       - @followees.each do |followee|
-        %tr
+        %tr{ id: "followee-#{followee.id}"}
           %td.text-left
             %img{ src: followee.gravatar_url }
             = link_to followee.full_name, profile_user_path(followee)
           %td.extra-padding= followee.queue_items.count
           %td.extra-padding= followee.followers.count
-          %td.extra-padding
-            = link_to "", method: :post do
-              %i.glyphicon.glyphicon-remove
+          %td.unfollow
+            = button_to follow_path(followee), method: :delete, class: 'btn text-danger' do
+              %i.fas.fa-user-times.align-

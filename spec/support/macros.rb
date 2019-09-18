@@ -18,4 +18,12 @@ def sign_in(user=nil)
   fill_in 'Password', with: user.password
   click_button 'Sign In'
   expect(page).to have_current_path(home_path)
+  user
+  user
+end
+
+def follow_user(user)
+  sign_in
+  visit profile_user_path user
+  click_button 'Follow'
 end

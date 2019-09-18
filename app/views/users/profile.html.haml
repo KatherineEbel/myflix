@@ -2,10 +2,18 @@
   .row
     .col-sm-10.col-sm-offset-1
       %article
-        %header
-          %img{src: @user.gravatar_url, alt: @user.full_name}
-          %h2 #{@user.full_name} 's video collections (#{@user.queue_items.count})
-          %button.btn.btn-default Follow
+        %header.row
+          .col
+            %img{src: @user.gravatar_url, alt: @user.full_name}
+            %h2 #{@user.full_name} 's video collections (#{@user.queue_items.count})
+          .col
+            - if current_user.can_follow? @user
+              = button_to 'Follow',
+               follows_path, method: :post,
+                params: { id: params[:id] },
+                 class: 'btn btn-success float-right mb-5'
+            - else
+              %span.float-right.text-info.lead Following
         %table.table
           %thead
             %tr
@@ -17,7 +25,7 @@
                 %td
                   = link_to item.video_title, video_path(item.video)
                 %td
-                  = link_to item.category_name, category_path(item.category)
+                  = link_to item.category_name, item.category
 
 %section.user_reviews.container
   .row

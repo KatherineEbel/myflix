@@ -1,5 +1,6 @@
 %article.video_category
   %header
     %h3= link_to category.name
-  .videos.row.d-flex.justify-content-around
-    = render category.videos
+  .container
+    .videos.row.d-flex.justify-content-start.align-content-center
+      = render category.videos

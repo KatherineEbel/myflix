@@ -12,7 +12,7 @@
       .navbar-nav.d-flex.align-items-center
         = link_to "Videos", '/home'
         = link_to "My Queue", my_queue_path
-        = link_to "People"
+        = link_to "People", people_path
       .form-inline.mr-2.ml-lg-5
         = form_tag(search_videos_path, method: :get) do
           = search_field_tag(:query, nil, placeholder: 'Search for videos here...',

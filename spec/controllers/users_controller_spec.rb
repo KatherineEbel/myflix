@@ -39,6 +39,24 @@ describe UsersController, type: :controller do
         expect(user.full_name).to eq user_data[:full_name]
       end
 
+      context 'welcome_email' do
+        it 'should send the email' do
+          expect(ActionMailer::Base.deliveries).to_not be_empty
+        end
+
+        it 'should send to the correct recipient' do
+          expect(ActionMailer::Base.deliveries.last.to.first).to eq user_data[:email]
+        end
+
+        it 'should have the right content' do
+          mail = ActionMailer::Base.deliveries.last
+          # expect(content).to include user_data[:full_name]
+          expect(mail.subject).to include 'Welcome to MyFlix'
+          expect(mail.text_part.body.to_s).to include user_data[:full_name]
+          expect(mail.text_part.body.to_s).to include 'Welcome to MyFlix'
+        end
+      end
+
       it 'should should redirect to sign_in_path' do
         expect(response).to redirect_to sign_in_path
       end

@@ -18,6 +18,8 @@ class SessionsController < ApplicationController
   end
 
   def destroy
+    redirect_to sign_in_path if session[:current_user_id].nil?
+
     user = User.find_by_id session[:current_user_id]
     session[:current_user_id] = nil
     redirect_to sign_in_path flash: {

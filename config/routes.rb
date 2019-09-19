@@ -22,6 +22,10 @@ Rails.application.routes.draw do
 
   resources :categories, only: :show
   resources :follows, only: [:create, :destroy]
+  resources :passwords,
+            except: [:index, :show, :destroy],
+            path_names: { new: 'forgot', edit: 'reset' },
+            param: :reset_token
   resources :queue_items, only: :destroy do
     patch 'update', on: :collection
   end

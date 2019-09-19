@@ -40,4 +40,23 @@ class User < ApplicationRecord
     followed_users.destroy_by(follower_id: self, followee_id: other_user)
                   .first&.followee.eql?(other_user) || false
   end
+
+  def generate_password_token!
+    generate_token(:reset_password_token)
+    self.reset_password_sent_at = Time.now.utc
+    save!
+  end
+
+  def password_token_valid?
+    (reset_password_sent_at + 1.hour) > Time.now.utc
+  end
+
+  private
+
+  def generate_token(column)
+    loop do
+      self[column] = SecureRandom.urlsafe_base64
+      break unless User.exists?(column => column)
+    end
+  end
 end

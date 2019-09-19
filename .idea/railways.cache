@@ -1,6 +1,7 @@
                                Prefix Verb   URI Pattern                                                                              Controller#Action
                                  root GET    /                                                                                        pages#front
                                  home GET    /home(.:format)                                                                          videos#index
+                         link_expired GET    /link_expired(.:format)                                                                  passwords#link_expired
                              my_queue GET    /my_queue(.:format)                                                                      queue_items#index
                                people GET    /people(.:format)                                                                        follows#show
                              register GET    /register(.:format)                                                                      users#new
@@ -27,8 +28,14 @@
                             ui_invite GET    /ui/invite(.:format)                                                                     ui#invite
                           ui_register GET    /ui/register(.:format)                                                                   ui#register
                      ui_invalid_token GET    /ui/invalid_token(.:format)                                                              ui#invalid_token
+                             category GET    /categories/:id(.:format)                                                                categories#show
                               follows POST   /follows(.:format)                                                                       follows#create
                                follow DELETE /follows/:id(.:format)                                                                   follows#destroy
+                            passwords POST   /passwords(.:format)                                                                     passwords#create
+                         new_password GET    /passwords/forgot(.:format)                                                              passwords#new
+                        edit_password GET    /passwords/:reset_token/reset(.:format)                                                  passwords#edit
+                             password PATCH  /passwords/:reset_token(.:format)                                                        passwords#update
+                                      PUT    /passwords/:reset_token(.:format)                                                        passwords#update
                           queue_items PATCH  /queue_items/update(.:format)                                                            queue_items#update
                            queue_item DELETE /queue_items/:id(.:format)                                                               queue_items#destroy
                              sessions POST   /sessions(.:format)                                                                      sessions#create

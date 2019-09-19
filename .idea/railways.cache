@@ -1,0 +1,66 @@
+                               Prefix Verb   URI Pattern                                                                              Controller#Action
+                                 root GET    /                                                                                        pages#front
+                                 home GET    /home(.:format)                                                                          videos#index
+                         link_expired GET    /link_expired(.:format)                                                                  passwords#link_expired
+                             my_queue GET    /my_queue(.:format)                                                                      queue_items#index
+                               people GET    /people(.:format)                                                                        follows#show
+                             register GET    /register(.:format)                                                                      users#new
+                              sign_in GET    /sign_in(.:format)                                                                       sessions#new
+                             sign_out GET    /sign_out(.:format)                                                                      sessions#destroy
+                                   ui GET    /ui(.:format)                                                                            ui#index
+              ui_admin_views_payments GET    /ui/admin_views_payments(.:format)                                                       ui#admin_views_payments
+            ui_confirm_password_reset GET    /ui/confirm_password_reset(.:format)                                                     ui#confirm_password_reset
+                   ui_admin_add_video GET    /ui/admin_add_video(.:format)                                                            ui#admin_add_video
+                             ui_video GET    /ui/video(.:format)                                                                      ui#video
+                              ui_home GET    /ui/home(.:format)                                                                       ui#home
+                              ui_user GET    /ui/user(.:format)                                                                       ui#user
+                   ui_forgot_password GET    /ui/forgot_password(.:format)                                                            ui#forgot_password
+                            ui_people GET    /ui/people(.:format)                                                                     ui#people
+                  ui_plan_and_billing GET    /ui/plan_and_billing(.:format)                                                           ui#plan_and_billing
+                             ui_genre GET    /ui/genre(.:format)                                                                      ui#genre
+                           ui_account GET    /ui/account(.:format)                                                                    ui#account
+                             ui_front GET    /ui/front(.:format)                                                                      ui#front
+                             ui_index GET    /ui/index(.:format)                                                                      ui#index
+                          ui_my_queue GET    /ui/my_queue(.:format)                                                                   ui#my_queue
+                   ui_advanced_search GET    /ui/advanced_search(.:format)                                                            ui#advanced_search
+                    ui_reset_password GET    /ui/reset_password(.:format)                                                             ui#reset_password
+                           ui_sign_in GET    /ui/sign_in(.:format)                                                                    ui#sign_in
+                            ui_invite GET    /ui/invite(.:format)                                                                     ui#invite
+                          ui_register GET    /ui/register(.:format)                                                                   ui#register
+                     ui_invalid_token GET    /ui/invalid_token(.:format)                                                              ui#invalid_token
+                             category GET    /categories/:id(.:format)                                                                categories#show
+                              follows POST   /follows(.:format)                                                                       follows#create
+                               follow DELETE /follows/:id(.:format)                                                                   follows#destroy
+                            passwords POST   /passwords(.:format)                                                                     passwords#create
+                         new_password GET    /passwords/forgot(.:format)                                                              passwords#new
+                        edit_password GET    /passwords/:reset_token/reset(.:format)                                                  passwords#edit
+                             password PATCH  /passwords/:reset_token(.:format)                                                        passwords#update
+                                      PUT    /passwords/:reset_token(.:format)                                                        passwords#update
+                          queue_items PATCH  /queue_items/update(.:format)                                                            queue_items#update
+                           queue_item DELETE /queue_items/:id(.:format)                                                               queue_items#destroy
+                             sessions POST   /sessions(.:format)                                                                      sessions#create
+                         profile_user GET    /users/:id/profile(.:format)                                                             users#profile
+                                users POST   /users(.:format)                                                                         users#create
+                    video_queue_items POST   /videos/:video_id/queue_items(.:format)                                                  queue_items#create
+                        video_reviews POST   /videos/:video_id/reviews(.:format)                                                      reviews#create
+                        search_videos GET    /videos/search(.:format)                                                                 videos#search
+                                video GET    /videos/:id(.:format)                                                                    videos#show
+        rails_mandrill_inbound_emails POST   /rails/action_mailbox/mandrill/inbound_emails(.:format)                                  action_mailbox/ingresses/mandrill/inbound_emails#create
+        rails_postmark_inbound_emails POST   /rails/action_mailbox/postmark/inbound_emails(.:format)                                  action_mailbox/ingresses/postmark/inbound_emails#create
+           rails_relay_inbound_emails POST   /rails/action_mailbox/relay/inbound_emails(.:format)                                     action_mailbox/ingresses/relay/inbound_emails#create
+        rails_sendgrid_inbound_emails POST   /rails/action_mailbox/sendgrid/inbound_emails(.:format)                                  action_mailbox/ingresses/sendgrid/inbound_emails#create
+         rails_mailgun_inbound_emails POST   /rails/action_mailbox/mailgun/inbound_emails/mime(.:format)                              action_mailbox/ingresses/mailgun/inbound_emails#create
+       rails_conductor_inbound_emails GET    /rails/conductor/action_mailbox/inbound_emails(.:format)                                 rails/conductor/action_mailbox/inbound_emails#index
+                                      POST   /rails/conductor/action_mailbox/inbound_emails(.:format)                                 rails/conductor/action_mailbox/inbound_emails#create
+    new_rails_conductor_inbound_email GET    /rails/conductor/action_mailbox/inbound_emails/new(.:format)                             rails/conductor/action_mailbox/inbound_emails#new
+   edit_rails_conductor_inbound_email GET    /rails/conductor/action_mailbox/inbound_emails/:id/edit(.:format)                        rails/conductor/action_mailbox/inbound_emails#edit
+        rails_conductor_inbound_email GET    /rails/conductor/action_mailbox/inbound_emails/:id(.:format)                             rails/conductor/action_mailbox/inbound_emails#show
+                                      PATCH  /rails/conductor/action_mailbox/inbound_emails/:id(.:format)                             rails/conductor/action_mailbox/inbound_emails#update
+                                      PUT    /rails/conductor/action_mailbox/inbound_emails/:id(.:format)                             rails/conductor/action_mailbox/inbound_emails#update
+                                      DELETE /rails/conductor/action_mailbox/inbound_emails/:id(.:format)                             rails/conductor/action_mailbox/inbound_emails#destroy
+rails_conductor_inbound_email_reroute POST   /rails/conductor/action_mailbox/:inbound_email_id/reroute(.:format)                      rails/conductor/action_mailbox/reroutes#create
+                   rails_service_blob GET    /rails/active_storage/blobs/:signed_id/*filename(.:format)                               active_storage/blobs#show
+            rails_blob_representation GET    /rails/active_storage/representations/:signed_blob_id/:variation_key/*filename(.:format) active_storage/representations#show
+                   rails_disk_service GET    /rails/active_storage/disk/:encoded_key/*filename(.:format)                              active_storage/disk#show
+            update_rails_disk_service PUT    /rails/active_storage/disk/:encoded_token(.:format)                                      active_storage/disk#update
+                 rails_direct_uploads POST   /rails/active_storage/direct_uploads(.:format)                                           active_storage/direct_uploads#create

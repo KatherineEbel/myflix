@@ -1,0 +1,39 @@
+%article.video
+  .container.d-lg-flex
+    .video_large_cover
+      = image_tag @video.large_cover_url
+    .video_info.mt-sm-3
+      %header
+        %h3= @video.title
+        %span= "Review: #{@video.rating_average}/5.0"
+      %p= @video.description
+      .d-flex
+        %a.btn.btn-primary.mr-sm-2(href="") Watch Now
+        - unless current_user.queued? @video
+          = link_to '+ My Queue',
+           video_queue_items_path(@video),
+            class: 'btn btn-secondary',
+            method: :post
+
+%section.reviews.container
+  = bootstrap_form_with(model: [@video, @review],
+   layout: :horizontal, label_col: 'col-md-2', control_col: 'col-md-6') do |f|
+    %fieldset
+      = f.select :rating, rating_options, { label: 'Rate this video' }
+      = f.text_area :text, label: 'Write a Review', rows: 6
+    %fieldset.actions
+      = f.primary
+      = link_to 'Cancel', @video
+  %header
+    %h3 User Reviews (#{@video.reviews.count})
+  %ul
+    - @video.reviews.each do |review|
+      -if review.text
+        %li.review.row
+          .col-sm-2
+            %span Review: #{review.rating} / 5
+            %p
+              by
+              = link_to review.reviewer.full_name, profile_user_path(review.reviewer)
+          .col-sm-8
+            %p= review.text

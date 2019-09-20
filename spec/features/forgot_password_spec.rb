@@ -14,6 +14,13 @@ feature 'Forgot Password' do
   scenario 'following email button click' do
     current_email.click_link 'Reset your password'
     expect(page).to have_content('Reset Your Password')
+    fill_in 'Password', with: 'new_password'
+    click_button 'Reset Password'
+    expect(page).to have_current_path sign_in_path
+    fill_in 'Email', with: user.email
+    fill_in 'Password', with: 'new_password'
+    click_button 'Sign In'
+    expect(page).to have_content "Welcome back #{user.full_name}"
   end
 
   scenario 'email has the content' do

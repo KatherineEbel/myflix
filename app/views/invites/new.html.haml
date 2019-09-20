@@ -1,0 +1,10 @@
+%section.invite.container
+  .row
+    .col-sm-10.col-sm-offset-1
+      = bootstrap_form_with model: @invite, url: invites_path, class: 'invite' do |f|
+        %header
+          %h1 Invite a friend to join MyFlix!
+        = f.text_field :friend_name, label: "Friend's Name"
+        = f.email_field :friend_email, label: "Friend's Email Address"
+        = f.text_area :message, label: 'Invitation Message'
+        = f.submit 'Send Invitation', class: 'btn btn-secondary action'

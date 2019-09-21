@@ -12,9 +12,9 @@ class InvitesController < ApplicationController
                              :message
                            ))
     if @invite.valid?
-      UserMailer.with(invite: @invite, user: current_user).invite_email.deliver_now
+      UserMailer.with(invite: @invite, inviter: current_user).invite_email.deliver_now
       redirect_to people_path,
-                  flash: { success: 'Your Invitation has been sent' }
+                  flash: { success: 'Your Invitation has been sent.' }
     else
       render :new, flash: { danger: 'Please correct errors and try again' }
     end

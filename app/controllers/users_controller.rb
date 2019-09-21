@@ -8,8 +8,11 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new params.require(:user).permit(:email, :password, :full_name)
+    @user = User.new params
+            .require(:user)
+            .permit(:email, :password, :full_name)
     if @user.save
+      User.add_followees(@user, params[:referral_id]) if params[:referral_id]
       redirect_to sign_in_path
       flash[:success] = 'Registration completed, you can log in now.'
       UserMailer.with(user: @user).welcome_email.deliver_now

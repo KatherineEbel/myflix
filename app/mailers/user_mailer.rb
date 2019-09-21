@@ -11,10 +11,10 @@ class UserMailer < ApplicationMailer
 
   def invite_email
     @invite = params[:invite]
-    @user = params[:user]
+    @inviter = params[:inviter]
     mail(
       to: @invite.friend_email,
-      subject: "Invitation to MyFlix from #{@user.full_name}"
+      subject: "Invitation to MyFlix from #{@inviter.full_name}"
     )
   end
 end

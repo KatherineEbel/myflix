@@ -13,10 +13,6 @@ class Invite
     end
   end
 
-  def id
-    inviter_id
-  end
-
   def persisted?
     false
   end

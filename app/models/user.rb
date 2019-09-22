@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  include Tokenizable
   has_secure_password validations: false
 
   validates_presence_of :email, :full_name, :password_digest
@@ -55,14 +56,5 @@ class User < ApplicationRecord
 
   def password_token_valid?
     (reset_password_sent_at + 1.hour) > Time.now.utc
-  end
-
-  private
-
-  def generate_token(column)
-    loop do
-      self[column] = SecureRandom.urlsafe_base64
-      break unless User.exists?(column => column)
-    end
   end
 end

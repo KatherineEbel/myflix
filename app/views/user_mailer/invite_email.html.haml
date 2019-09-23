@@ -5,6 +5,6 @@
   %body
     %h1 Hi, #{@invite.friend_name}
     %article.text-center
-      %p.m-1 @invite.message
+      %p.m-1 #{@invite.message}
       %p Signed #{@inviter.full_name}
       = link_to 'Sign Up For MyFlix', register_url(referral_id: @inviter.id)

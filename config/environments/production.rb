@@ -64,15 +64,10 @@ Rails.application.configure do
   # config.active_job.queue_name_prefix = "myflix_production"
 
   config.action_mailer.perform_caching = false
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {
-    address: 'smtp.gmail.com',
-    port: 587,
-    host: 'ke-myflix.herokuapp.com',
-    user_name: ENV['GMAIL_USERNAME'],
-    password: ENV['GMAIL_PASSWORD'],
-    authentication: 'plain',
-    enable_starttls_auto: true
+  config.action_mailer.delivery_method = :mailgun
+  config.action_mailer.mailgun_settings = {
+    api_key: Rails.application.credentials.dig(:mailgun).dig(:api_key),
+    domain: Rails.application.credentails.dig(:mailgun).dig(:domain)
   }
 
   # Ignore bad email addresses and do not raise email delivery errors.

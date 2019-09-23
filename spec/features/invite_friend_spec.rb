@@ -4,6 +4,7 @@ feature 'Invitations' do
   let(:user) { Fabricate(:user) }
   let(:friend) { Fabricate.attributes_for(:user) }
   background do
+    Sidekiq::Testing.inline!
     clear_emails
     sign_in user
   end

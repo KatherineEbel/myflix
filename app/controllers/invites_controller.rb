@@ -12,7 +12,7 @@ class InvitesController < ApplicationController
                              :message
                            ))
     if @invite.valid?
-      UserMailer.with(invite: @invite, inviter: current_user).invite_email.deliver_now
+      InviteEmailWorker.perform_async(@invite.to_json, current_user.id)
       redirect_to people_path,
                   flash: { success: 'Your Invitation has been sent.' }
     else

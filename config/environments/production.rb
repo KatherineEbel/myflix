@@ -67,7 +67,7 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :mailgun
   config.action_mailer.mailgun_settings = {
     api_key: Rails.application.credentials.dig(:mailgun).dig(:api_key),
-    domain: 'ke-myflix.herokuapp.com'
+    domain: 'sandboxc0a6bff19c564a9d912bdc2eb5704ce4.mailgun.org'
   }
 
   # Ignore bad email addresses and do not raise email delivery errors.

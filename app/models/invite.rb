@@ -1,4 +1,5 @@
 class Invite
+  include ActiveModel::Serializers::JSON
   include ActiveModel::Validations
   include ActiveModel::Conversion
   extend ActiveModel::Naming
@@ -7,9 +8,19 @@ class Invite
   validates_presence_of :friend_name, :friend_email, :message
   validates_length_of :message, maximum: 400
 
-  def initialize(attributes = {})
-    attributes.each do |name, value|
-      send("#{name}=", value)
+  def initialize(hash = {})
+    self.attributes = hash
+  end
+
+  def attributes
+    { 'friend_name': friend_name,
+      'friend_email': friend_email,
+      'message': message }
+  end
+
+  def attributes=(hash)
+    hash.each do |key, value|
+      send("#{key}=", value)
     end
   end
 

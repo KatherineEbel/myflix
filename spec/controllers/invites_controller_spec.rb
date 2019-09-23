@@ -46,12 +46,12 @@ describe InvitesController do
 
         context 'invite email' do
           it 'should send the email' do
-            expect(ActionMailer::Base.deliveries).not_to be_empty
+            expect(InviteEmailWorker.jobs.size).to eq 1
           end
 
           it 'should be sent to the friends email' do
-            email = ActionMailer::Base.deliveries.last
-            expect(email.to.first).to eq friend[:email]
+            invite = Invite.new.from_json(InviteEmailWorker.jobs.last['args'].first)
+            expect(invite.friend_email).to eq friend[:email]
           end
         end
         it { should redirect_to people_path }

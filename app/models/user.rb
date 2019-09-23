@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  include Tokenizable
   has_secure_password validations: false
 
   validates_presence_of :email, :full_name, :password_digest
@@ -10,6 +11,12 @@ class User < ApplicationRecord
   has_many :queue_items
   accepts_nested_attributes_for :queue_items
   has_many :reviews, -> { order('created_at DESC') }
+
+  def self.add_followees(new_user, referrer_id)
+    friend = User.find(referrer_id)
+    friend.follow! new_user
+    new_user.follow! friend
+  end
 
   def review_for(video)
     reviews.where(video: video).first
@@ -49,14 +56,5 @@ class User < ApplicationRecord
 
   def password_token_valid?
     (reset_password_sent_at + 1.hour) > Time.now.utc
-  end
-
-  private
-
-  def generate_token(column)
-    loop do
-      self[column] = SecureRandom.urlsafe_base64
-      break unless User.exists?(column => column)
-    end
   end
 end

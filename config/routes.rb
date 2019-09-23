@@ -22,6 +22,7 @@ Rails.application.routes.draw do
 
   resources :categories, only: :show
   resources :follows, only: [:create, :destroy]
+  resources :invites, only: [:new, :create]
   resources :passwords,
             except: [:index, :show, :destroy],
             path_names: { new: 'forgot', edit: 'reset' },

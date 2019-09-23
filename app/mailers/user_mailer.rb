@@ -8,4 +8,13 @@ class UserMailer < ApplicationMailer
     @user = params[:user]
     mail(to: @user.email, subject: 'Link to Reset Your Password')
   end
+
+  def invite_email
+    @invite = params[:invite]
+    @inviter = params[:inviter]
+    mail(
+      to: @invite.friend_email,
+      subject: "Invitation to MyFlix from #{@inviter.full_name}"
+    )
+  end
 end

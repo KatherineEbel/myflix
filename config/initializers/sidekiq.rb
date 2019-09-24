@@ -1,4 +1,4 @@
-REDIS_URL = ENV['REDIS_PROVIDER'] || Rails
+REDIS_URL = ENV['REDIS_URL'] || Rails
   .application
   .credentials
   .dig(:redis).dig(:url)

@@ -5,6 +5,7 @@
       <w>lorem</w>
       <w>mailgun</w>
       <w>shoulda</w>
+      <w>sidekiq</w>
       <w>unfollow</w>
       <w>webpacker</w>
     </words>

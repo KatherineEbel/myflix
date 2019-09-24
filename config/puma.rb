@@ -34,10 +34,6 @@ workers ENV.fetch("WEB_CONCURRENCY") { 2 }
 #
 preload_app!
 
-before_fork do
-  ActiveRecord::Base.connection.disconnect!
-end
-
 on_worker_boot do
   ActiveRecord::Base.establish_connection
 end

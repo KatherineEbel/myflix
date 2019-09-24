@@ -35,15 +35,11 @@ workers ENV.fetch("WEB_CONCURRENCY") { 2 }
 preload_app!
 
 before_fork do
-  @sidekiq_pid ||= spawn('bundle exec sidekiq -t 25')
+  ActiveRecord::Base.connection.disconnect!
 end
 
 on_worker_boot do
   ActiveRecord::Base.establish_connection
-end
-
-on_restart do
-  Sidekiq.redis.shutdown { |conn| conn.close }
 end
 
 # Allow puma to be restarted by `rails restart` command.

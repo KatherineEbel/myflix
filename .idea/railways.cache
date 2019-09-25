@@ -7,6 +7,8 @@
                               sign_in GET    /sign_in(.:format)                                                                       sessions#new
                              sign_out GET    /sign_out(.:format)                                                                      sessions#destroy
                                    ui GET    /ui(.:format)                                                                            ui#index
+                         admin_videos POST   /admin/videos(.:format)                                                                  admin/videos#create
+                      new_admin_video GET    /admin/videos/new(.:format)                                                              admin/videos#new
               ui_admin_views_payments GET    /ui/admin_views_payments(.:format)                                                       ui#admin_views_payments
             ui_confirm_password_reset GET    /ui/confirm_password_reset(.:format)                                                     ui#confirm_password_reset
                    ui_admin_add_video GET    /ui/admin_add_video(.:format)                                                            ui#admin_add_video

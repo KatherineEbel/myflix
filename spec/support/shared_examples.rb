@@ -6,6 +6,14 @@ shared_examples 'require_sign_in' do
   end
 end
 
+shared_examples 'ensure_admin' do
+  it 'should redirect to the front page' do
+    set_current_user
+    action
+    expect(response).to redirect_to root_path
+  end
+end
+
 shared_examples 'flash[:success] message' do
   it 'should display flash[:success]' do
     expect(flash[:success]).to be_present

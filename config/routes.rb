@@ -10,6 +10,10 @@ Rails.application.routes.draw do
   get 'sign_out', to: 'sessions#destroy'
   get 'ui', to: 'ui#index'
 
+  namespace :admin do
+    resources :videos, only: [:new, :create]
+  end
+
   namespace 'ui' do
     ui_views_path = Rails.root.join('app', 'views', 'ui')
     Dir.entries(ui_views_path)

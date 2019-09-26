@@ -1,14 +1,14 @@
 %article.video
   .container.d-lg-flex
     .video_large_cover
-      = image_tag @video.large_cover_url
+      = image_tag @video.large_cover.url
     .video_info.mt-sm-3
       %header
         %h3= @video.title
         %span= "Review: #{@video.rating_average}/5.0"
       %p= @video.description
       .d-flex
-        %a.btn.btn-primary.mr-sm-2(href="") Watch Now
+        %a.btn.btn-primary.mr-sm-2(href="#{@video.video_url}") Watch Now
         - unless current_user.queued? @video
           = link_to '+ My Queue',
            video_queue_items_path(@video),

@@ -2,7 +2,8 @@
   .container
     .row
       .col-md-10.col-md-offset-1
-        = bootstrap_form_with model: [:admin, @video], layout: :horizontal do |f|
+        = bootstrap_form_with model: [:admin, @video],
+         layout: :horizontal, html: { multipart: true } do |f|
           %ul.nav.nav-tabs
             %li
               %a(href="/ui/admin_views_payments") Recent Payments
@@ -12,6 +13,7 @@
           = f.text_field :title
           = f.select :category_id, category_options, { include_blank: true }, { class: 'custom-select' }
           = f.text_area :description, rows: 8
-          = f.file_field :large_cover_url, class: 'btn btn-file', label: 'Large Cover'
-          = f.file_field :small_cover_url, class: 'btn btn-file', label: 'Small Cover'
+          = f.file_field :large_cover, class: 'btn btn-file', label: 'Large Cover'
+          = f.file_field :small_cover, class: 'btn btn-file', label: 'Small Cover'
+          = f.text_field :video_url, label: 'Video URL'
           = f.submit 'Add Video'

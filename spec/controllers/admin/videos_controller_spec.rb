@@ -53,7 +53,7 @@ describe Admin::VideosController do
 
         it { should permit(
                       :title, :description,
-                      :large_cover_url, :small_cover_url)
+                      :large_cover, :small_cover)
                       .for(:create, params: params).on(:video) }
 
         it_should_behave_like 'flash[:success] message'

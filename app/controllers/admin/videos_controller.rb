@@ -7,8 +7,8 @@ class Admin::VideosController < AdminsController
     @video = Video
       .new(params
              .require(:video)
-             .permit(:description, :large_cover_url,
-                     :small_cover_url, :title))
+             .permit(:description, :large_cover,
+                     :small_cover, :title, :video_url))
     category = Category.find(params[:video][:category_id])
     @video.category = category
 

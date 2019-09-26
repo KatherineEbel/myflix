@@ -28,3 +28,7 @@
           %a.dropdown-item(href="#") Account
           %a.dropdown-item(href="#") Plan and Billing
           %a.dropdown-item(href= sign_out_path) Sign Out
+          - if current_user.admin?
+            .dropdown-divider
+            %span.lead Admin Tasks
+            %a.dropdown-item(href= new_admin_video_path) Add a Video

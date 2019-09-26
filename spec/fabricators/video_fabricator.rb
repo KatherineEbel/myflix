@@ -2,8 +2,13 @@
 
 Fabricator(:video) do
   title { Faker::Lorem.word }
-  description { Faker::Lorem.words(number: 20).join(' ') }
-  small_cover_url { Faker::LoremFlickr.image(size: '166x236') }
-  large_cover_url { Faker::LoremFlickr.image(size: '665x375') }
   category
+  description { Faker::Lorem.words(number: 20).join(' ') }
+  video_url 'https://www.google.com'
+  small_cover do
+    Rails.root.join('spec/fixtures/monk.jpg').open
+  end
+  large_cover do
+    Rails.root.join('spec/fixtures/monk_large.jpg').open
+  end
 end

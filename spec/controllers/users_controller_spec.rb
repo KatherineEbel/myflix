@@ -25,6 +25,9 @@ describe UsersController, type: :controller do
     context 'valid form' do
       let(:user_data) { Fabricate.attributes_for(:user) }
       before do
+        allow(StripeWrapper::Charge)
+          .to receive(:create)
+                .and_return(StripeWrapper::Charge.new(StripeWrapper::Result.new('success', true)))
         post :create,
              params: { user: user_data }
       end
@@ -67,6 +70,11 @@ describe UsersController, type: :controller do
     context 'invalid form' do
       before do
         User.destroy_all
+        allow(StripeWrapper::Charge)
+          .to receive(:create)
+                .and_return(StripeWrapper::Charge
+                              .new(StripeWrapper::Result
+                                     .new('Some error', false)))
         post :create, params: {
           user: {
             email: '',

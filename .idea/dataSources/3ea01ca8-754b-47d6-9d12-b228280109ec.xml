@@ -15,7 +15,7 @@
     <database id="4" parent="1" name="myflix_development">
       <ObjectId>24895</ObjectId>
       <Owner>kathy</Owner>
-      <IntrospectionStateNumber>67434</IntrospectionStateNumber>
+      <IntrospectionStateNumber>74651</IntrospectionStateNumber>
       <Current>1</Current>
       <Relations>sequence|table|24897|24899|1
 sequence|table|24908|24910|1
@@ -26,7 +26,7 @@ sequence|table|33843|33845|1
 </Relations>
     </database>
     <database id="5" parent="1" name="myflix_test">
-      <ObjectId>34005</ObjectId>
+      <ObjectId>34082</ObjectId>
       <Owner>kathy</Owner>
     </database>
     <database id="6" parent="1" name="postgres">
@@ -129,7 +129,7 @@ sequence|table|33843|33845|1
       <Comment>standard public schema</Comment>
       <StateNumber>359</StateNumber>
       <Owner>kathy</Owner>
-      <IntrospectionStateNumber>67435</IntrospectionStateNumber>
+      <IntrospectionStateNumber>74652</IntrospectionStateNumber>
       <Current>1</Current>
     </schema>
     <access-method id="26" parent="4" name="btree">
@@ -274,7 +274,7 @@ sequence|table|33843|33845|1
     <table id="46" parent="25" name="videos">
       <ObjectId>24910</ObjectId>
       <Owner>kathy</Owner>
-      <StateNumber>4689</StateNumber>
+      <StateNumber>72132</StateNumber>
     </table>
     <column id="47" parent="39" name="key">
       <Position>1</Position>
@@ -666,14 +666,20 @@ sequence|table|33843|33845|1
       <StateNumber>792</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <index id="105" parent="46" name="videos_pkey">
+    <column id="105" parent="46" name="video_url">
+      <Position>9</Position>
+      <DataType>varchar|0s</DataType>
+      <StateNumber>72132</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <index id="106" parent="46" name="videos_pkey">
       <ObjectId>24917</ObjectId>
       <StateNumber>4689</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
     </index>
-    <key id="106" parent="46" name="videos_pkey">
+    <key id="107" parent="46" name="videos_pkey">
       <ObjectId>24918</ObjectId>
       <StateNumber>792</StateNumber>
       <ColNames>id</ColNames>

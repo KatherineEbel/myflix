@@ -11,9 +11,10 @@ class User < ApplicationRecord
   has_many :queue_items
   accepts_nested_attributes_for :queue_items
   has_many :reviews, -> { order('created_at DESC') }
+  attr_accessor :referral_id, :stripe_token
 
-  def self.add_followees(new_user, referrer_id)
-    friend = User.find(referrer_id)
+  def self.add_followees(new_user)
+    friend = User.find(new_user.referral_id)
     friend.follow! new_user
     new_user.follow! friend
   end

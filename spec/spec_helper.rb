@@ -13,7 +13,30 @@
 # it.
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
+require 'capybara/apparition'
+require 'capybara'
 require 'capybara/email/rspec'
+require 'vcr'
+
+
+VCR.configure do |config|
+  config.cassette_library_dir = 'spec/vcr'
+  config.hook_into :webmock
+  config.configure_rspec_metadata!
+  config.allow_http_connections_when_no_cassette = true
+  config.ignore_localhost = true
+end
+
+
+Capybara.register_driver :apparition do |app|
+  Capybara::Apparition::Driver.new(app, headless: false)
+end
+
+Capybara.javascript_driver = :apparition
+Capybara.configure do |config|
+  config.default_max_wait_time = 7
+  config.server_port = 52662
+end
 
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate
@@ -45,7 +68,6 @@ RSpec.configure do |config|
   # inherited by the metadata hash of host groups and examples, rather than
   # triggering implicit auto-inclusion in groups with matching metadata.
   config.shared_context_metadata_behavior = :apply_to_host_groups
-
 # The settings below are suggested to provide a good initial experience
 # with RSpec, but feel free to customize to your heart's content.
 =begin

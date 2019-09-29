@@ -31,8 +31,14 @@ def register(user)
   fill_in 'Email', with: user[:email]
   fill_in 'Password', with: user[:password]
   fill_in 'Full name', with: user[:full_name]
+  within_frame(name: '__privateStripeFrame7') do
+    fill_in name: 'cardnumber', with: '4242424242424242'
+    fill_in name: 'exp-date', with: '10/25'
+    fill_in name: 'cvc', with: '234'
+    fill_in name: 'postal', with: '32043'
+  end
   click_button 'Sign Up'
-  expect(page).to have_content 'Registration completed'
+  expect(page).to have_content 'Registration complete'
 end
 
 def send_invitation(friend)

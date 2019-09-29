@@ -1,0 +1,274 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.stripe.com/v1/tokens
+    body:
+      encoding: UTF-8
+      string: card[number]=4242424242424242&card[exp_month]=9&card[exp_year]=2020&card[cvc]=314
+    headers:
+      User-Agent:
+      - Stripe/v1 RubyBindings/5.2.0
+      Authorization:
+      - Bearer sk_test_HgzjcEX1e2EMzGsihsPjIZXU00AthWlTdD
+      Content-Type:
+      - application/x-www-form-urlencoded
+      X-Stripe-Client-User-Agent:
+      - '{"bindings_version":"5.2.0","lang":"ruby","lang_version":"2.6.3 p62 (2019-04-16)","platform":"x86_64-darwin18","engine":"ruby","publisher":"stripe","uname":"Darwin
+        Katherines-MacBook-Pro.local 18.7.0 Darwin Kernel Version 18.7.0: Tue Aug
+        20 16:57:14 PDT 2019; root:xnu-4903.271.2~2/RELEASE_X86_64 x86_64","hostname":"Katherines-MacBook-Pro.local"}'
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Sat, 28 Sep 2019 11:32:05 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '786'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Methods:
+      - GET, POST, HEAD, OPTIONS, DELETE
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - Request-Id, Stripe-Manage-Version, X-Stripe-External-Auth-Required, X-Stripe-Privileged-Session-Required
+      Access-Control-Max-Age:
+      - '300'
+      Cache-Control:
+      - no-cache, no-store
+      Request-Id:
+      - req_XzipcxzLENPY1G
+      Stripe-Version:
+      - '2019-09-09'
+      Strict-Transport-Security:
+      - max-age=31556926; includeSubDomains; preload
+    body:
+      encoding: UTF-8
+      string: |
+        {
+          "id": "tok_1FNe9hFwnVEodejJz6W7PKdH",
+          "object": "token",
+          "card": {
+            "id": "card_1FNe9hFwnVEodejJusTEl4ct",
+            "object": "card",
+            "address_city": null,
+            "address_country": null,
+            "address_line1": null,
+            "address_line1_check": null,
+            "address_line2": null,
+            "address_state": null,
+            "address_zip": null,
+            "address_zip_check": null,
+            "brand": "Visa",
+            "country": "US",
+            "cvc_check": "unchecked",
+            "dynamic_last4": null,
+            "exp_month": 9,
+            "exp_year": 2020,
+            "fingerprint": "0B1oaDWGAwduWyjY",
+            "funding": "credit",
+            "last4": "4242",
+            "metadata": {
+            },
+            "name": null,
+            "tokenization_method": null
+          },
+          "client_ip": "107.77.215.196",
+          "created": 1569670325,
+          "livemode": false,
+          "type": "card",
+          "used": false
+        }
+    http_version: 
+  recorded_at: Sat, 28 Sep 2019 11:32:05 GMT
+- request:
+    method: post
+    uri: https://api.stripe.com/v1/charges
+    body:
+      encoding: UTF-8
+      string: amount=999&currency=usd&description=MyFlix+subscription&source=tok_1FNe9hFwnVEodejJz6W7PKdH
+    headers:
+      User-Agent:
+      - Stripe/v1 RubyBindings/5.2.0
+      Authorization:
+      - Bearer sk_test_HgzjcEX1e2EMzGsihsPjIZXU00AthWlTdD
+      Content-Type:
+      - application/x-www-form-urlencoded
+      X-Stripe-Client-Telemetry:
+      - '{"last_request_metrics":{"request_id":"req_XzipcxzLENPY1G","request_duration_ms":660}}'
+      X-Stripe-Client-User-Agent:
+      - '{"bindings_version":"5.2.0","lang":"ruby","lang_version":"2.6.3 p62 (2019-04-16)","platform":"x86_64-darwin18","engine":"ruby","publisher":"stripe","uname":"Darwin
+        Katherines-MacBook-Pro.local 18.7.0 Darwin Kernel Version 18.7.0: Tue Aug
+        20 16:57:14 PDT 2019; root:xnu-4903.271.2~2/RELEASE_X86_64 x86_64","hostname":"Katherines-MacBook-Pro.local"}'
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Sat, 28 Sep 2019 11:32:06 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '2794'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Methods:
+      - GET, POST, HEAD, OPTIONS, DELETE
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - Request-Id, Stripe-Manage-Version, X-Stripe-External-Auth-Required, X-Stripe-Privileged-Session-Required
+      Access-Control-Max-Age:
+      - '300'
+      Cache-Control:
+      - no-cache, no-store
+      Request-Id:
+      - req_MARW7LiNFoH9Ly
+      Stripe-Version:
+      - '2019-09-09'
+      Strict-Transport-Security:
+      - max-age=31556926; includeSubDomains; preload
+    body:
+      encoding: UTF-8
+      string: |
+        {
+          "id": "ch_1FNe9iFwnVEodejJKL4wz9OI",
+          "object": "charge",
+          "amount": 999,
+          "amount_refunded": 0,
+          "application": null,
+          "application_fee": null,
+          "application_fee_amount": null,
+          "balance_transaction": "txn_1FNe9iFwnVEodejJmlFdkYiI",
+          "billing_details": {
+            "address": {
+              "city": null,
+              "country": null,
+              "line1": null,
+              "line2": null,
+              "postal_code": null,
+              "state": null
+            },
+            "email": null,
+            "name": null,
+            "phone": null
+          },
+          "captured": true,
+          "created": 1569670326,
+          "currency": "usd",
+          "customer": null,
+          "description": "MyFlix subscription",
+          "destination": null,
+          "dispute": null,
+          "failure_code": null,
+          "failure_message": null,
+          "fraud_details": {
+          },
+          "invoice": null,
+          "livemode": false,
+          "metadata": {
+          },
+          "on_behalf_of": null,
+          "order": null,
+          "outcome": {
+            "network_status": "approved_by_network",
+            "reason": null,
+            "risk_level": "normal",
+            "risk_score": 63,
+            "seller_message": "Payment complete.",
+            "type": "authorized"
+          },
+          "paid": true,
+          "payment_intent": null,
+          "payment_method": "card_1FNe9hFwnVEodejJusTEl4ct",
+          "payment_method_details": {
+            "card": {
+              "brand": "visa",
+              "checks": {
+                "address_line1_check": null,
+                "address_postal_code_check": null,
+                "cvc_check": "pass"
+              },
+              "country": "US",
+              "exp_month": 9,
+              "exp_year": 2020,
+              "fingerprint": "0B1oaDWGAwduWyjY",
+              "funding": "credit",
+              "last4": "4242",
+              "three_d_secure": null,
+              "wallet": null
+            },
+            "type": "card"
+          },
+          "receipt_email": null,
+          "receipt_number": null,
+          "receipt_url": "https://pay.stripe.com/receipts/acct_1FMySMFwnVEodejJ/ch_1FNe9iFwnVEodejJKL4wz9OI/rcpt_FtR1dAYVwremoXYnfXjgmjrMzZNpkdn",
+          "refunded": false,
+          "refunds": {
+            "object": "list",
+            "data": [
+
+            ],
+            "has_more": false,
+            "total_count": 0,
+            "url": "/v1/charges/ch_1FNe9iFwnVEodejJKL4wz9OI/refunds"
+          },
+          "review": null,
+          "shipping": null,
+          "source": {
+            "id": "card_1FNe9hFwnVEodejJusTEl4ct",
+            "object": "card",
+            "address_city": null,
+            "address_country": null,
+            "address_line1": null,
+            "address_line1_check": null,
+            "address_line2": null,
+            "address_state": null,
+            "address_zip": null,
+            "address_zip_check": null,
+            "brand": "Visa",
+            "country": "US",
+            "customer": null,
+            "cvc_check": "pass",
+            "dynamic_last4": null,
+            "exp_month": 9,
+            "exp_year": 2020,
+            "fingerprint": "0B1oaDWGAwduWyjY",
+            "funding": "credit",
+            "last4": "4242",
+            "metadata": {
+            },
+            "name": null,
+            "tokenization_method": null
+          },
+          "source_transfer": null,
+          "statement_descriptor": null,
+          "statement_descriptor_suffix": null,
+          "status": "succeeded",
+          "transfer_data": null,
+          "transfer_group": null
+        }
+    http_version: 
+  recorded_at: Sat, 28 Sep 2019 11:32:06 GMT
+recorded_with: VCR 5.0.0

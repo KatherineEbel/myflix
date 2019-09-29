@@ -2,6 +2,7 @@
 
 class UsersController < ApplicationController
   before_action :require_user, only: :profile
+
   def new
     redirect_to home_path if logged_in?
     @user = User.new
@@ -10,15 +11,20 @@ class UsersController < ApplicationController
   def create
     @user = User.new params
             .require(:user)
-            .permit(:email, :password, :full_name)
-    if @user.save
-      User.add_followees(@user, params[:referral_id]) if params[:referral_id]
-      redirect_to sign_in_path
-      flash[:success] = 'Registration completed, you can log in now.'
-      UserMailer.with(user: @user).welcome_email.deliver_now
-    else
+            .permit(:email, :password, :full_name, :referral_id, :stripe_token)
+    unless @user.valid?
+      flash[:danger] = 'There were problems with your registration information'
       render :new
-      flash[:danger] = 'Correct errors and try again.'
+      return
+    end
+    charge = StripeWrapper::Charge.create(@user.stripe_token)
+    if charge.successful? && @user.save
+      User.add_followees @user if @user.referral_id
+      UserMailer.with(user: @user).welcome_email.deliver_now
+      redirect_to sign_in_path, flash: { success: 'Registration complete, you can sign in!'}
+    else
+      flash[:danger] = charge.result.data
+      render :new
     end
   end
 

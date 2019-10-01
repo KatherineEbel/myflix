@@ -5,7 +5,7 @@
     .video_info.mt-sm-3
       %header
         %h3= @video.title
-        %span= "Review: #{@video.rating_average}/5.0"
+        %span= @video.rating
       %p= @video.description
       .d-flex
         %a.btn.btn-primary.mr-sm-2(href="#{@video.video_url}") Watch Now

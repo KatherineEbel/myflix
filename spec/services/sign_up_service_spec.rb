@@ -131,5 +131,16 @@ describe SignUpService do
       end
     end
   end
+
+  describe '#send_welcome_email' do
+    let(:user) { Fabricate(:user) }
+    it 'should deliver email' do
+      service = SignUpService.new(user)
+      allow(UserMailer).to receive(:with).with({ user: user})
+      allow(UserMailer).to receive_message_chain(:with, :welcome_email, :deliver_now)
+      service.send_welcome_email
+      expect(UserMailer).to have_received(:with).with({ user: user })
+    end
+  end
 end
 

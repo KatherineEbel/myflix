@@ -16,6 +16,6 @@ class SignUpService
   end
 
   def send_welcome_email
-
+    UserMailer.with(user: @user).welcome_email.deliver_now
   end
 end

@@ -11,13 +11,7 @@ describe SignUpService do
                                     .with(user.stripe_token)
                                     .and_return(Result.new(true, 1, nil))
       end
-      it 'should return the user id' do
-        result = SignUpService.new(user, payment_handler: payment_handler).register
-        expect(result.user_id).to_not be_nil
-        expect {
-          User.find(result.user_id)
-        }.to_not raise_error
-      end
+
       it 'should charge the credit card' do
         result = SignUpService.new(user, payment_handler: payment_handler).register
         expect(result.success?).to be true

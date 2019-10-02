@@ -8,8 +8,7 @@ class SignUpService
     result = @payment_handler.process(@user.stripe_token)
     if @user.valid? && result&.success?
       @user.save
-      result.user_id = @user.id
-      User.add_followees(@user) unless @user.referral_id.nil?
+      User.add_followees(@user) unless @user.referral_id.blank?
       send_welcome_email
     end
     result

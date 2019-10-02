@@ -12,18 +12,11 @@ class UsersController < ApplicationController
     @user = User.new params
             .require(:user)
             .permit(:email, :password, :full_name, :referral_id, :stripe_token)
-    unless @user.valid?
-      flash[:danger] = 'There were problems with your registration information'
-      render :new
-      return
-    end
-    charge = StripeWrapper::Charge.create(@user.stripe_token)
-    if charge.successful? && @user.save
-      User.add_followees @user if @user.referral_id
-      UserMailer.with(user: @user).welcome_email.deliver_now
+    result = SignUpService.new(@user).register
+    if result.success?
       redirect_to sign_in_path, flash: { success: 'Registration complete, you can sign in!'}
     else
-      flash[:danger] = charge.result.data
+      flash[:danger] = result.error_message
       render :new
     end
   end

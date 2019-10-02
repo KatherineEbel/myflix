@@ -22,12 +22,12 @@ describe UsersController, type: :controller do
   end
 
   describe 'POST #create' do
-    context 'valid form' do
-      let(:user_data) { Fabricate.attributes_for(:user) }
+    context 'successful user sign up' do
+      PaymentResult = Struct.new(:success?, :error_message)
+      SignUpResult = Struct.new(:success?, :user_id, :error_message)
+      let(:user_data) { Fabricate.attributes_for(:registration_candidate) }
       before do
-        allow(StripeWrapper::Charge)
-          .to receive(:create)
-                .and_return(StripeWrapper::Charge.new(StripeWrapper::Result.new('success', true)))
+        allow_any_instance_of(PaymentService).to receive(:process).and_return(PaymentResult.new(true, nil))
         post :create,
              params: { user: user_data }
       end
@@ -42,23 +42,6 @@ describe UsersController, type: :controller do
         expect(user.full_name).to eq user_data[:full_name]
       end
 
-      context 'welcome_email' do
-        it 'should send the email' do
-          expect(ActionMailer::Base.deliveries).to_not be_empty
-        end
-
-        it 'should send to the correct recipient' do
-          expect(ActionMailer::Base.deliveries.last.to.first).to eq user_data[:email]
-        end
-
-        it 'should have the right content' do
-          mail = ActionMailer::Base.deliveries.last
-          # expect(content).to include user_data[:full_name]
-          expect(mail.subject).to include 'Welcome to MyFlix'
-          expect(mail.text_part.body.to_s).to include user_data[:full_name]
-          expect(mail.text_part.body.to_s).to include 'Welcome to MyFlix'
-        end
-      end
 
       it 'should should redirect to sign_in_path' do
         expect(response).to redirect_to sign_in_path
@@ -67,26 +50,20 @@ describe UsersController, type: :controller do
       it_behaves_like 'flash[:success] message'
     end
 
-    context 'invalid form' do
-      before do
-        User.destroy_all
-        allow(StripeWrapper::Charge)
-          .to receive(:create)
-                .and_return(StripeWrapper::Charge
-                              .new(StripeWrapper::Result
-                                     .new('Some error', false)))
-        post :create, params: {
-          user: {
-            email: '',
-            password: '',
-            full_name: ''
-          }
-        }
+    context 'unsuccessful user sign up' do
+      PaymentResult = Struct.new(:success?, :error_message)
+      SignUpResult = Struct.new(:success?, :error_message)
+     before do
+       allow_any_instance_of(PaymentService)
+         .to receive(:process)
+               .and_return(PaymentResult.new(false, 'There was a problem'))
+        post :create, params: { user: {
+          email: '',
+          password: '',
+          full_name: ''
+        }}
       end
 
-      it 'should not create the user' do
-        expect(User.count).to eq 0
-      end
       it 'should render new template' do
         expect(response).to render_template :new
       end

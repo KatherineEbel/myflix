@@ -8,7 +8,6 @@ module StripeWrapper
 
   end
   class Charge
-    attr_reader :result
     def initialize(result)
       @result = result
     end
@@ -35,8 +34,12 @@ module StripeWrapper
       end
     end
 
+    def message
+      @result.data
+    end
+
     def successful?
-      result.success
+      @result.success
     end
   end
 end

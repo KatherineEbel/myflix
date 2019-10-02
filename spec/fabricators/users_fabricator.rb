@@ -11,3 +11,8 @@ end
 Fabricator(:admin, from: :user) do
   admin true
 end
+
+Fabricator(:registration_candidate, from: :user) do
+  stripe_token 'my_token'
+  referral_id nil
+end

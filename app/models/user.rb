@@ -2,7 +2,7 @@ class User < ApplicationRecord
   include Tokenizable
   has_secure_password validations: false
 
-  validates_presence_of :email, :full_name, :password_digest
+  validates_presence_of :email, :full_name, :password_digest, :customer_id
   validates_uniqueness_of :email
   has_many :followed_users, foreign_key: :follower_id, class_name: 'Follow'
   has_many :followees, through: :followed_users

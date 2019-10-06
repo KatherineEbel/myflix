@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 Fabricator(:user) do
+  customer_id 'cus_123test'
   email { Faker::Internet.email }
   password { Faker::Internet.password }
   full_name { Faker::Name.name }

@@ -1,4 +1,5 @@
 module StripeWrapper
+  require 'ostruct'
   class Result
     attr_reader :data, :success
     def initialize(data, success)
@@ -40,6 +41,41 @@ module StripeWrapper
 
     def successful?
       @result.success
+    end
+  end
+
+  class Customer
+    def self.create(user)
+      begin
+        customer = Stripe::Customer.create({
+          email: user.email,
+          source: user.stripe_token })
+        user.update!(customer_id: customer.id)
+        OpenStruct.new(success?: true, error: nil)
+      rescue => e
+        puts e
+        OpenStruct.new(success?: false, error: e.message)
+      end
+    end
+  end
+
+  class Subscription
+    def self.create(customer_id)
+      begin
+        subscription = Stripe::Subscription.create({
+          customer: customer_id,
+          items: [{ plan: 'plan_FvLaEBqzjQ9ZTR'}],
+          expand: ['latest_invoice.payment_intent']})
+
+        if subscription.latest_invoice.payment_intent.status.eql?('requires_payment_method')
+          OpenStruct.new(success?: false, error: 'Problem billing your card, please provide a different one.')
+        else
+          OpenStruct.new(success?: true, error: nil)
+        end
+      rescue => e
+        puts e
+        OpenStruct.new(success?: false, error: e.message)
+      end
     end
   end
 end

@@ -12,11 +12,11 @@ class UsersController < ApplicationController
     @user = User.new params
             .require(:user)
             .permit(:email, :password, :full_name, :referral_id, :stripe_token)
-    result = SignUpService.new(@user).register
+    result = CreateSignUp.call(@user)
     if result.success?
       redirect_to sign_in_path, flash: { success: 'Registration complete, you can sign in!'}
     else
-      flash[:danger] = result.error_message
+      flash[:danger] = result.error
       render :new
     end
   end

@@ -39,6 +39,7 @@ def register(user)
   end
   click_button 'Sign Up'
   expect(page).to have_content 'Registration complete'
+  save_and_open_page
 end
 
 def send_invitation(friend)

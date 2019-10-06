@@ -15,8 +15,8 @@ http_interactions:
       - application/x-www-form-urlencoded
       X-Stripe-Client-User-Agent:
       - '{"bindings_version":"5.2.0","lang":"ruby","lang_version":"2.6.3 p62 (2019-04-16)","platform":"x86_64-darwin18","engine":"ruby","publisher":"stripe","uname":"Darwin
-        Katherines-MacBook-Pro.local 18.7.0 Darwin Kernel Version 18.7.0: Tue Aug
-        20 16:57:14 PDT 2019; root:xnu-4903.271.2~2/RELEASE_X86_64 x86_64","hostname":"Katherines-MacBook-Pro.local"}'
+        Katherines-MBP.router 18.7.0 Darwin Kernel Version 18.7.0: Tue Aug 20 16:57:14
+        PDT 2019; root:xnu-4903.271.2~2/RELEASE_X86_64 x86_64","hostname":"Katherines-MBP.router"}'
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -29,7 +29,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Sat, 28 Sep 2019 11:32:05 GMT
+      - Sun, 06 Oct 2019 19:24:43 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -49,7 +49,7 @@ http_interactions:
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_XzipcxzLENPY1G
+      - req_lnvAwLuzNSMHBv
       Stripe-Version:
       - '2019-09-09'
       Strict-Transport-Security:
@@ -58,10 +58,10 @@ http_interactions:
       encoding: UTF-8
       string: |
         {
-          "id": "tok_1FNe9hFwnVEodejJz6W7PKdH",
+          "id": "tok_1FQfLTFwnVEodejJruyQcpF1",
           "object": "token",
           "card": {
-            "id": "card_1FNe9hFwnVEodejJusTEl4ct",
+            "id": "card_1FQfLTFwnVEodejJQ1RHykEd",
             "object": "card",
             "address_city": null,
             "address_country": null,
@@ -85,20 +85,20 @@ http_interactions:
             "name": null,
             "tokenization_method": null
           },
-          "client_ip": "107.77.215.196",
-          "created": 1569670325,
+          "client_ip": "107.72.178.177",
+          "created": 1570389883,
           "livemode": false,
           "type": "card",
           "used": false
         }
     http_version: 
-  recorded_at: Sat, 28 Sep 2019 11:32:05 GMT
+  recorded_at: Sun, 06 Oct 2019 19:24:43 GMT
 - request:
     method: post
     uri: https://api.stripe.com/v1/charges
     body:
       encoding: UTF-8
-      string: amount=999&currency=usd&description=MyFlix+subscription&source=tok_1FNe9hFwnVEodejJz6W7PKdH
+      string: amount=999&currency=usd&description=MyFlix+subscription&source=tok_1FQfLTFwnVEodejJruyQcpF1
     headers:
       User-Agent:
       - Stripe/v1 RubyBindings/5.2.0
@@ -107,11 +107,11 @@ http_interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       X-Stripe-Client-Telemetry:
-      - '{"last_request_metrics":{"request_id":"req_XzipcxzLENPY1G","request_duration_ms":660}}'
+      - '{"last_request_metrics":{"request_id":"req_lnvAwLuzNSMHBv","request_duration_ms":1393}}'
       X-Stripe-Client-User-Agent:
       - '{"bindings_version":"5.2.0","lang":"ruby","lang_version":"2.6.3 p62 (2019-04-16)","platform":"x86_64-darwin18","engine":"ruby","publisher":"stripe","uname":"Darwin
-        Katherines-MacBook-Pro.local 18.7.0 Darwin Kernel Version 18.7.0: Tue Aug
-        20 16:57:14 PDT 2019; root:xnu-4903.271.2~2/RELEASE_X86_64 x86_64","hostname":"Katherines-MacBook-Pro.local"}'
+        Katherines-MBP.router 18.7.0 Darwin Kernel Version 18.7.0: Tue Aug 20 16:57:14
+        PDT 2019; root:xnu-4903.271.2~2/RELEASE_X86_64 x86_64","hostname":"Katherines-MBP.router"}'
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -124,11 +124,11 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Sat, 28 Sep 2019 11:32:06 GMT
+      - Sun, 06 Oct 2019 19:24:44 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '2794'
+      - '2822'
       Connection:
       - keep-alive
       Access-Control-Allow-Credentials:
@@ -144,7 +144,7 @@ http_interactions:
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_MARW7LiNFoH9Ly
+      - req_amvsRg4oYRpqoW
       Stripe-Version:
       - '2019-09-09'
       Strict-Transport-Security:
@@ -153,14 +153,14 @@ http_interactions:
       encoding: UTF-8
       string: |
         {
-          "id": "ch_1FNe9iFwnVEodejJKL4wz9OI",
+          "id": "ch_1FQfLUFwnVEodejJi6ZmNc3J",
           "object": "charge",
           "amount": 999,
           "amount_refunded": 0,
           "application": null,
           "application_fee": null,
           "application_fee_amount": null,
-          "balance_transaction": "txn_1FNe9iFwnVEodejJmlFdkYiI",
+          "balance_transaction": "txn_1FQfLUFwnVEodejJZvBiHcrZ",
           "billing_details": {
             "address": {
               "city": null,
@@ -175,7 +175,7 @@ http_interactions:
             "phone": null
           },
           "captured": true,
-          "created": 1569670326,
+          "created": 1570389884,
           "currency": "usd",
           "customer": null,
           "description": "MyFlix subscription",
@@ -195,13 +195,13 @@ http_interactions:
             "network_status": "approved_by_network",
             "reason": null,
             "risk_level": "normal",
-            "risk_score": 63,
+            "risk_score": 42,
             "seller_message": "Payment complete.",
             "type": "authorized"
           },
           "paid": true,
           "payment_intent": null,
-          "payment_method": "card_1FNe9hFwnVEodejJusTEl4ct",
+          "payment_method": "card_1FQfLTFwnVEodejJQ1RHykEd",
           "payment_method_details": {
             "card": {
               "brand": "visa",
@@ -215,6 +215,7 @@ http_interactions:
               "exp_year": 2020,
               "fingerprint": "0B1oaDWGAwduWyjY",
               "funding": "credit",
+              "installments": null,
               "last4": "4242",
               "three_d_secure": null,
               "wallet": null
@@ -223,7 +224,7 @@ http_interactions:
           },
           "receipt_email": null,
           "receipt_number": null,
-          "receipt_url": "https://pay.stripe.com/receipts/acct_1FMySMFwnVEodejJ/ch_1FNe9iFwnVEodejJKL4wz9OI/rcpt_FtR1dAYVwremoXYnfXjgmjrMzZNpkdn",
+          "receipt_url": "https://pay.stripe.com/receipts/acct_1FMySMFwnVEodejJ/ch_1FQfLUFwnVEodejJi6ZmNc3J/rcpt_FwYStdC8cuQbSOYbG1ijUyZKkDCdObM",
           "refunded": false,
           "refunds": {
             "object": "list",
@@ -232,12 +233,12 @@ http_interactions:
             ],
             "has_more": false,
             "total_count": 0,
-            "url": "/v1/charges/ch_1FNe9iFwnVEodejJKL4wz9OI/refunds"
+            "url": "/v1/charges/ch_1FQfLUFwnVEodejJi6ZmNc3J/refunds"
           },
           "review": null,
           "shipping": null,
           "source": {
-            "id": "card_1FNe9hFwnVEodejJusTEl4ct",
+            "id": "card_1FQfLTFwnVEodejJQ1RHykEd",
             "object": "card",
             "address_city": null,
             "address_country": null,
@@ -270,5 +271,5 @@ http_interactions:
           "transfer_group": null
         }
     http_version: 
-  recorded_at: Sat, 28 Sep 2019 11:32:06 GMT
+  recorded_at: Sun, 06 Oct 2019 19:24:44 GMT
 recorded_with: VCR 5.0.0

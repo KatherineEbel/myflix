@@ -23,11 +23,11 @@ describe UsersController, type: :controller do
 
   describe 'POST #create' do
     context 'successful user sign up' do
-      PaymentResult = Struct.new(:success?, :error_message)
       SignUpResult = Struct.new(:success?, :user_id, :error_message)
       let(:user_data) { Fabricate.attributes_for(:registration_candidate) }
       before do
-        allow_any_instance_of(PaymentService).to receive(:process).and_return(PaymentResult.new(true, nil))
+        allow(Stripe::Customer).to receive(:create).and_return(OpenStruct.new(id: 'cus_test123'))
+        allow(StripeWrapper::Subscription).to receive(:create).and_return(OpenStruct.new(success?: true, error: false))
         post :create,
              params: { user: user_data }
       end
@@ -51,13 +51,9 @@ describe UsersController, type: :controller do
     end
 
     context 'unsuccessful user sign up' do
-      PaymentResult = Struct.new(:success?, :error_message)
-      SignUpResult = Struct.new(:success?, :error_message)
      before do
-       allow_any_instance_of(PaymentService)
-         .to receive(:process)
-               .and_return(PaymentResult.new(false, 'There was a problem'))
-        post :create, params: { user: {
+       allow(Stripe::Customer).to receive(:create).and_return(Stripe::StripeError.new('Some error'))
+       post :create, params: { user: {
           email: '',
           password: '',
           full_name: ''

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_26_134017) do
+ActiveRecord::Schema.define(version: 2019_10_03_151916) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,6 +54,7 @@ ActiveRecord::Schema.define(version: 2019_09_26_134017) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.boolean "admin"
+    t.string "customer_id"
   end
 
   create_table "videos", force: :cascade do |t|

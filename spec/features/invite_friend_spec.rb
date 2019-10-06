@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'Invitations' do
+feature 'Invitations', js: true, vcr: true do
   let(:user) { Fabricate(:user) }
   let(:friend) { Fabricate.attributes_for(:user) }
   background do

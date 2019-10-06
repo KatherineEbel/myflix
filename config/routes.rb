@@ -31,6 +31,7 @@ Rails.application.routes.draw do
             except: [:index, :show, :destroy],
             path_names: { new: 'forgot', edit: 'reset' },
             param: :reset_token
+  resources :payments, only: [:create]
   resources :queue_items, only: :destroy do
     patch 'update', on: :collection
   end

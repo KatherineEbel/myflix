@@ -1,11 +1,21 @@
 %section.register.container.mt-3
-  = bootstrap_form_for @user, layout: :horizontal, control_col: 'col-lg-6' do |f|
+  = bootstrap_form_with model: @user, layout: :horizontal,
+   control_col: 'col-lg-6', html: { id: 'payment-form' } do |f|
     %header
       %h1 Register
+      #card-errors.alert.alert-danger(style="display: none;" role="alert")
     %fieldset
-      = hidden_field_tag :referral_id, params[:referral_id]
+      = f.hidden_field :referral_id, value: params[:referral_id]
+      = f.hidden_field :stripe_token
       = f.email_field :email
       = f.password_field :password
       = f.text_field :full_name
-    %fieldset.actions
-      = f.primary 'Sign Up'
+    %fieldset
+      - unless @user.stripe_token
+        .form-group
+          %label(for="card-element") Payment Information
+          #card-element.w-75
+      = f.submit 'Sign Up'
+
+= javascript_pack_tag 'stripe'
+= stylesheet_pack_tag 'stripe'

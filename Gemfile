@@ -6,11 +6,14 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '2.6.3'
 
 gem 'carrierwave-aws'
+gem 'draper'
 gem 'mailgun-rails'
 gem 'mailgun-ruby'
 gem "mini_magick"
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0.0'
+gem 'stripe-rails'
+gem 'webmock'
 # Use postgresql as the database for Active Record
 gem 'pg', '>= 0.18', '< 2.0'
 # Use Puma as the app server
@@ -43,6 +46,7 @@ group :development, :test do
   gem 'fabrication'
   gem 'faker', git: 'https://github.com/faker-ruby/faker.git', branch: 'master'
   gem 'rspec-rails', '~> 4.0.0.beta2'
+  gem 'vcr'
 end
 
 group :development do
@@ -57,8 +61,10 @@ end
 
 group :test do
   # Adds support for Capybara system testing and selenium driver
+  gem 'apparition'
   gem 'capybara', '>= 2.15'
   gem 'capybara-email'
+  gem 'database_cleaner'
   gem 'launchy'
   gem 'rails-controller-testing'
   gem 'selenium-webdriver'

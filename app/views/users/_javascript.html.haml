@@ -1,0 +1,26 @@
+= stripe_javascript_tag
+:javascript
+  const stripeResponseHandler = (status, response) => {
+    const $form = $('section.register form')
+    if (response.error) {
+      $form.find('#stripe-error').text(response.error.message).show()
+      $form.find('button').prop('disabled', false)
+    } else {
+      const token = response.id
+      $('#user_stripe_token').val(token)
+      $form.get(0).submit()
+    }
+  }
+
+  jQuery($ => {
+    $('section.register form').submit(e => {
+      const form = e.target
+      form.find('button').prop('disabled', true)
+      if ($('#card_number').length) {
+        stripe.createToken(form, stripeResponseHandler)
+        return false
+      } else {
+        return true
+      }
+    })
+  })

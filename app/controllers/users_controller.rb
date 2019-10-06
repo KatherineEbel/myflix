@@ -2,6 +2,7 @@
 
 class UsersController < ApplicationController
   before_action :require_user, only: :profile
+
   def new
     redirect_to home_path if logged_in?
     @user = User.new
@@ -10,15 +11,13 @@ class UsersController < ApplicationController
   def create
     @user = User.new params
             .require(:user)
-            .permit(:email, :password, :full_name)
-    if @user.save
-      User.add_followees(@user, params[:referral_id]) if params[:referral_id]
-      redirect_to sign_in_path
-      flash[:success] = 'Registration completed, you can log in now.'
-      UserMailer.with(user: @user).welcome_email.deliver_now
+            .permit(:email, :password, :full_name, :referral_id, :stripe_token)
+    result = CreateSignUp.call(@user)
+    if result.success?
+      redirect_to sign_in_path, flash: { success: 'Registration complete, you can sign in!'}
     else
+      flash[:danger] = result.error
       render :new
-      flash[:danger] = 'Correct errors and try again.'
     end
   end
 

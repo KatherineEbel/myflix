@@ -2,7 +2,7 @@ class User < ApplicationRecord
   include Tokenizable
   has_secure_password validations: false
 
-  validates_presence_of :email, :full_name, :password_digest
+  validates_presence_of :email, :full_name, :password_digest, :customer_id
   validates_uniqueness_of :email
   has_many :followed_users, foreign_key: :follower_id, class_name: 'Follow'
   has_many :followees, through: :followed_users
@@ -11,9 +11,10 @@ class User < ApplicationRecord
   has_many :queue_items
   accepts_nested_attributes_for :queue_items
   has_many :reviews, -> { order('created_at DESC') }
+  attr_accessor :referral_id, :stripe_token
 
-  def self.add_followees(new_user, referrer_id)
-    friend = User.find(referrer_id)
+  def self.add_followees(new_user)
+    friend = User.find(new_user.referral_id)
     friend.follow! new_user
     new_user.follow! friend
   end
